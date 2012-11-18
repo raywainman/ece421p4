@@ -8,7 +8,7 @@ class Game
     #initalize_preconditions(game_type, players)
     @game_type = game_type
     @players = players
-    @grid = Array.new(6) { Array.new(7) { "-" } }
+    @grid = Array.new(6) { Array.new(7) }
     #initialize_postconditions()
   end
 
@@ -24,7 +24,7 @@ class Game
   def make_move(player, column)
     added = false
     (0..6).each{ |row|
-      if @grid[6-row-1][column] == "-"
+      if @grid[6-row-1][column] == nil
         @grid[6-row-1][column] = @game_type.get_player_label(player)
         added = true
         break;
@@ -39,6 +39,9 @@ class Game
     str = ""
     @grid.each { |row|
       row.each { |element|
+        if element == nil
+          element = "-"
+        end
         str << element + " "
       }
       str << "\n"
