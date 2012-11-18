@@ -1,10 +1,18 @@
+# Abstract Player class
 class Player
-  
-  def initialize
+  # Computes a move to be played by the player, returns the column number to
+  # play
+  def do_move(game)
+    raise "Not Implemented"
+  end
+
+  # Returns a string description of the type of player
+  def description()
+    raise "Not Implemented"
   end
   
-  def do_move()
-    print "Add to column> "
-    return gets.to_i
+  # Sets the token for this particular player
+  def setToken(token)
+    raise "Not Implemented"
   end
 end
