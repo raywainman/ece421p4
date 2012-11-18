@@ -1,7 +1,7 @@
 class AIPlayer < Player
   def do_move(game)
     # random column for now
-    random = rand(6)
+    random = rand(7)
     while game.is_column_full?(random)
       random = rand(6)
     end
