@@ -5,9 +5,13 @@ class Connect4 < GameType
 
   def initialize
   end
-    
+
   def get_player_label(player)
-    return @@labels[player]
+    get_player_label_preconditions(player)
+    class_invariant()
+    result = @@labels[player]
+    class_invariant()
+    get_player_label_postconditions(result)
   end
 
   def max_players()
@@ -22,7 +26,12 @@ class Connect4 < GameType
     return "Connect4"
   end
 
+  # TODO: Write the evaluate win algorithm
   def evaluate_win(grid)
+    evaluate_win_preconditions(grid)
+    class_invariant()
     raise "Not implemented"
+    class_invariant()
+    evaluate_win_postconditions(result)
   end
 end
