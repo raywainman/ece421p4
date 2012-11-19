@@ -12,7 +12,7 @@ class Player
   end
   
   # Sets the token for this particular player
-  def setToken(token)
+  def set_token(token)
     raise "Not Implemented"
   end
 end
