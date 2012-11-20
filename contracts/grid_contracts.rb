@@ -8,6 +8,26 @@ module GridContracts
     assert j >= 0, "column must be >= 0"
     assert j < 7, "column must be < 7"
   end
+  
+  def pre_get_row_length()
+    # No preconditions
+  end
+  
+  def post_get_row_length(result)
+    assert(result!=nil)
+    assert(result.respond_to?("to_i"))
+    assert(result >= 0)
+  end
+  
+  def pre_get_column_length()
+    # No preconditions
+  end
+  
+  def post_get_column_length(result)
+    assert(result!=nil)
+    assert(result.respond_to?("to_i"))
+    assert(result >= 0)
+  end
 
   def grid_access_postconditions(result)
     # No postconditions since result can be nil

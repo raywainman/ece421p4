@@ -9,6 +9,24 @@ class Grid
     @grid = Array.new(6) { Array.new(7) }
   end
 
+  def get_row_length()
+    pre_get_row_length()
+    class_invariant()
+    result = @grid.length
+    class_invariant()
+    post_get_row_length(result)
+    result
+  end
+  
+  def get_column_length()
+    pre_get_column_length()
+    class_invariant()
+    result = @grid[0].length
+  class_invariant()
+    post_get_column_length(result)
+    result
+  end
+  
   # Gets the token at row i and column j
   def [](i,j)
     grid_access_preconditions(i,j)
@@ -19,6 +37,11 @@ class Grid
     return result
   end
 
+  #TEMP
+  def []=(i,j,k)
+    @grid[i][j] = k
+  end
+  
   # Gets each element from the grid starting in the the top left
   def each
     each_preconditions()
