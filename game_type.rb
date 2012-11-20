@@ -178,7 +178,7 @@ class GameType
     row_length.times { |row|
       col_length.times { |col|
 
-        if([row_length - row, col_length - col].min < 4)
+        if([row_length - row, col_length - col].min < expected_length)
           next
         end
 
