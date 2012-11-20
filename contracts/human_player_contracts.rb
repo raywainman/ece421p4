@@ -2,8 +2,8 @@ require "test/unit"
 
 module HumanPlayerContracts
   include Test::Unit::Assertions
-  def do_move_preconditions(game)
-    assert game.is_a?(Game), "invalid game argument"
+  def do_move_preconditions(grid)
+    assert grid.is_a?(Grid), "invalid grid argument"
   end
 
   def do_move_postconditions(result)

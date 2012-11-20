@@ -12,6 +12,7 @@ class Otto < GameType
     result = @@labels[player]
     class_invariant()
     get_player_label_postconditions(result)
+    return result
   end
 
   def max_players()

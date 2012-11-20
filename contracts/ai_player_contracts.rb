@@ -12,8 +12,8 @@ module AIPlayerContracts
     assert @difficulty <= 1, "difficulty must be a number between 0 and 1"
   end
 
-  def do_move_preconditions(game)
-    assert game.is_a?(Game), "invalid game argument"
+  def do_move_preconditions(grid)
+    assert grid.is_a?(Grid), "invalid grid argument"
   end
 
   def do_move_postconditions(result)

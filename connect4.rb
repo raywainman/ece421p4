@@ -1,7 +1,14 @@
 require_relative "./game_type"
+require_relative "./contracts/connect4_contracts"
 
 class Connect4 < GameType
+  include Connect4Contracts
+
   @@labels = ["B", "R", "G", "Y"]
+
+  def self.labels
+    return @@labels
+  end
 
   def initialize
   end
@@ -12,6 +19,7 @@ class Connect4 < GameType
     result = @@labels[player]
     class_invariant()
     get_player_label_postconditions(result)
+    return result
   end
 
   def max_players()
