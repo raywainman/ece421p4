@@ -26,13 +26,4 @@ class Otto < GameType
   def game_name()
     return "OTTO/TOOT"
   end
-
-  # TODO: Write the evaluate win algorithm
-  def evaluate_win(grid)
-    evaluate_win_preconditions(grid)
-    class_invariant()
-    raise "Not implemented"
-    class_invariant()
-    evaluate_win_postconditions(result)
-  end
 end

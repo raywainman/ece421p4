@@ -1,13 +1,11 @@
+require_relative "./contracts/game_type_contracts"
+
 # Abstract game type class
 class GameType
+  include GameTypeContracts
+  
   # Gets the label that should be given to the given player number
   def get_player_label(player)
-    raise "Not implemented"
-  end
-
-  # Evaluates the grid and returns the winning player (if there is a win),
-  # -1 otherwise
-  def evaluate_win(grid)
     raise "Not implemented"
   end
 
@@ -24,5 +22,13 @@ class GameType
   # Returns a string representing the game
   def game_name()
     raise "Not implemented"
+  end
+
+  # Evaluates the grid and returns the winning player (if there is a win),
+  # -1 otherwise
+  def evaluate_win(grid, winning_token)
+    evaluate_win_preconditions(grid, winning_token)
+    raise "Not implemented"
+    evaluate_win_postconditions()
   end
 end
