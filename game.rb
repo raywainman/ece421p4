@@ -33,11 +33,15 @@ class Game
 
   def play()
     while true
-      @players.each_with_index{ |player, index|
-        puts @grid.to_s
-        puts "Player " + index.to_s + "'s turn (" + @game_type.get_player_label(index) + ") - " + player.description
-        @grid.make_move(@game_type.get_player_label(index), player.do_move(@grid))
-      }
+      puts @grid.to_s
+      puts "Player " + @active_player.to_s + "'s turn (" + @game_type.get_player_label(@active_player) + ") - " + @players[@active_player].description
+      @grid.make_move(@game_type.get_player_label(@active_player), @players[@active_player].do_move(@grid))
+      if @game_type.evaluate_win(@grid, @game_type.winning_token(@active_player))
+        puts "Player " + @active_player.to_s + " has won!"
+        reset()
+      else
+        @active_player = (@active_player + 1) % @players.size
+      end
     end
   end
 end

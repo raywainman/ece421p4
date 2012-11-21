@@ -26,4 +26,16 @@ class Otto < GameType
   def game_name()
     return "OTTO/TOOT"
   end
+
+  def winning_token(player)
+    winning_token_preconditions(player)
+    str = ""
+    str << get_player_label(player)
+    2.times {
+      str << get_player_label(1-player)
+    }
+    str << get_player_label(player)
+    winning_token_postconditions(str)
+    return str
+  end
 end

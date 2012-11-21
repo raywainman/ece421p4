@@ -25,10 +25,8 @@ module GameContracts
   end
 
   def reset_postconditions()
-    @grid.each{ |row|
-      row.each{ |column|
-        assert column == nil, "grid element must be nil to start"
-      }
+    @grid.each{ |element|
+      assert element == nil, "grid element must be nil to start"
     }
     assert @active_player == 0, "active_player must be first player"
   end

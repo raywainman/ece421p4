@@ -97,8 +97,8 @@ class Grid
   def reset()
     reset_preconditions()
     class_invariant()
-    @grid.each_index{ |row_i|
-      row.each_index{ |col_i|
+    @grid.each_with_index{ |row_e, row_i|
+      row_e.each_index{ |col_i|
         @grid[row_i][col_i] = nil
       }
     }
@@ -106,8 +106,7 @@ class Grid
     reset_postconditions()
   end
 
-  # Makes a move for the given player on the given column
-  # SHOULD BE PRIVATE
+  # Makes a move for the given player token on the given column
   def make_move(token, column)
     make_move_preconditions(token, column)
     added = false

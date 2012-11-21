@@ -33,4 +33,14 @@ class Connect4 < GameType
   def game_name()
     return "Connect4"
   end
+  
+  def winning_token(player)
+    winning_token_preconditions(player)
+    str = ""
+    4.times {
+      str << get_player_label(player)
+    }
+    winning_token_postconditions(str)
+    return str
+  end
 end

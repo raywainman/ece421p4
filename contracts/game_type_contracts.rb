@@ -33,8 +33,6 @@ module GameTypeContracts
     assert !length.nil?, "token cannot be null"
     assert length.is_a?(Integer), "winning token must be a string"
   end
-  
-  
 
   def evaluate_win_preconditions(grid, winning_token)
     check_grid(grid)
