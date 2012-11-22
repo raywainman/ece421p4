@@ -14,6 +14,7 @@ class Game
     # Set the tokens
     @players.each_with_index{ |player, index|
       player.set_token(@game_type.get_player_label(index))
+      player.set_winning_token(@game_type.winning_token(index))
     }
     @grid = Grid.new
     @active_player = 0
@@ -35,7 +36,13 @@ class Game
     while true
       puts @grid.to_s
       puts "Player " + @active_player.to_s + "'s turn (" + @game_type.get_player_label(@active_player) + ") - " + @players[@active_player].description
-      @grid.make_move(@game_type.get_player_label(@active_player), @players[@active_player].do_move(@grid))
+      other_players = Hash.new
+      (0...@players.size).each { |index|
+        if index != @active_player
+          other_players[@players[index].token] = @players[index].winning_token
+        end
+      }
+      @grid.make_move(@game_type.get_player_label(@active_player), @players[@active_player].do_move(@grid, other_players))
       if @game_type.evaluate_win(@grid, @game_type.winning_token(@active_player))
         puts "Player " + @active_player.to_s + " has won!"
         reset()
@@ -46,6 +53,6 @@ class Game
   end
 end
 
-players = [HumanPlayer.new, AIPlayer.new(0.5)]
+players = [HumanPlayer.new, AIPlayer.new(0.5), AIPlayer.new(0.5)]
 game = Game.new(Connect4.new, players)
 game.play

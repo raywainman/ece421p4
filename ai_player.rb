@@ -13,8 +13,8 @@ class AIPlayer < Player
 
   # TODO: Write the AI algorithm with the @difficulty parameter used as a
   # probability that the bot makes a random (stupid) move
-  def do_move(grid)
-    do_move_preconditions(grid)
+  def do_move(grid, other_players)
+    do_move_preconditions(grid, other_players)
     class_invariant()
     # random column for now
     random = rand(7)
@@ -28,12 +28,5 @@ class AIPlayer < Player
 
   def description()
     "AI"
-  end
-
-  def set_token(token)
-    set_token_preconditions(token)
-    @token = token
-    class_invariant()
-    set_token_postconditions()
   end
 end

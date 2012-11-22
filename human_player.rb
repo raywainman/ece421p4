@@ -3,8 +3,8 @@ require_relative "./contracts/human_player_contracts"
 
 class HumanPlayer < Player
   include HumanPlayerContracts
-  def do_move(game)
-    do_move_preconditions(game)
+  def do_move(grid, other_players)
+    do_move_preconditions(grid, other_players)
     class_invariant()
     print "Add to column> "
     result = gets.to_i
@@ -15,12 +15,5 @@ class HumanPlayer < Player
 
   def description()
     "Human"
-  end
-
-  def set_token(token)
-    set_token_preconditions(token)
-    @token = token
-    class_invariant()
-    set_token_postconditions()
   end
 end
