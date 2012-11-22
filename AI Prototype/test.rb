@@ -3,10 +3,10 @@ class Test
     @grid = Array.new(6) { Array.new(7) }
 
     @grid[1][0] = 1
-    @grid[1][1] = 1
-    @grid[2][2] = 1
-    @grid[3][3] = 1
-    @grid[4][4] = 1
+    @grid[1][1] = "o"
+    #@grid[2][2] = 1
+    @grid[3][3] = "t"
+    @grid[4][4] = "t"
     @grid[5][5] = 1
     @grid[4][6] = 1
     @grid[5][6] = 1
@@ -15,7 +15,7 @@ class Test
 
     @grid[0][0] = "2"
     @grid[0][1] = "t"
-    @grid[0][2] = "t"
+    @grid[3][2] = "t"
 
     @grid[0][4] = 1
     @grid[0][5] = 1
@@ -52,18 +52,85 @@ class Test
 
   end
 
-  def get_best_move(players)
-    players = []
+  def get_best_move(players, win_seq, grid)
+    players = [[],[],[]]
 
+    expected_len = win_seq.length
+    best_choice = 0
+    
+    currentplayer = 0
+    current_token = "o"
+    
+    found = false
     row_length = @grid.length()
     col_length = @grid[0].length()
-    score = Array.new(players.length()) { Array.new(col_length) }
-    players.each_with_index() { |player, index|
+    score = Array.new(players.length()) { Array.new(col_length, 0) }
+    row_indicator = buildRowIndicator()
+
+    horizscore(currentplayer,current_token, win_seq, grid, row_indicator, score)
+    vertscore(currentplayer,current_token, win_seq, grid, row_indicator, score)
+    leftdiagscore(currentplayer,current_token, win_seq, grid, row_indicator, score)
+    rightdiagscore(currentplayer,current_token, win_seq, grid, row_indicator, score)
+
+    #Play to win
+    col_length.times { |col|
+      if(score[currentplayer][col] >= expected_len)
+        if(row_indicator[col] <= row)
+          best_choice = j
+          found = true
+        end
+      end
     }
 
-  end
+    #determine opponent scores
+    if(!found)
+      players.each_with_index() { |player, index|
 
-  def horizscore(player_index, win_seq, gridx, rowindicator, score)
+        next unless index != currentplayer
+        token = "t"#player.get_token
+
+        horizscore(index,token, win_seq, grid, row_indicator, score)
+        vertscore(index,token, win_seq, grid, row_indicator, score)
+        leftdiagscore(index,token, win_seq, grid, row_indicator, score)
+        rightdiagscore(index,token, win_seq, grid, row_indicator, score)
+      }
+    end
+       
+    #Play to block win
+    if(!found) 
+      players.each_with_index() { |player, index|
+        col_length.times { |col|
+          if(score[index][col] >= expected_len)
+            if(row_indicator[col] <= row)
+              best_choice = j
+              found  = true
+            end
+          end
+        }
+        }
+        end
+        
+        if(!found) 
+        col_length.times { |col|
+          if(score[currentplayer][col] == expected_len - 2)
+            if(row_indicator[col] <= row)
+              best_choice = j
+              found  = true
+            end
+          end
+        }
+        end
+
+        if(!found) 
+          best_choice = rand(0...col_length)
+        end
+
+        return best_choice
+        
+    end
+
+
+  def horizscore(player_index, player_token, win_seq, gridx, rowindicator, score)
 
     row_length = @grid.length()
     col_length = @grid[0].length()
@@ -102,7 +169,7 @@ class Test
         score[player_index][i] = count;
       end
 
-      process(win_seq, string, "o", 0, score, i)
+      process_score(win_seq, string, player_token, player_index, score, i)
 
       puts string
 
@@ -138,7 +205,7 @@ class Test
 
   end
 
-  def vertscore(player_index, win_seq, grid, rowindicator, score)
+  def vertscore(player_index,player_token, win_seq, grid, rowindicator, score)
 
     row_length = @grid.length()
     col_length = @grid[0].length()
@@ -159,14 +226,7 @@ class Test
         j+=1
       end
 
-      #get count values
-      count = -1#get_fing_func_to_get_value()
-
-      if (count > score[player_index][i])
-        score[player_index][i] = count;
-      end
-
-      process(win_seq, string, "o", 0, score, i)
+      process_score(win_seq, string, player_token, player_index, score, i)
 
       #puts self.to_s
       puts string
@@ -175,7 +235,7 @@ class Test
 
   end
 
-  def leftdiagscore(player_index, win_seq, grid, rowindicator, score)
+  def leftdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
 
     row_length = @grid.length()
     col_length = @grid[0].length()
@@ -206,21 +266,14 @@ class Test
         j+=1
       end
 
-      #get count values
-      count = -1#get_fing_func_to_get_value()
-
-      if (count > score[player_index][i])
-        score[player_index][i] = count;
-      end
-
-      process(win_seq, string, "o", 0, score, i)
+      process_score(win_seq, string, player_token, player_index, score, i)
 
       #puts self.to_s
       puts string
     }
   end
 
-  def rightdiagscore(player_index, win_seq, grid, rowindicator, score)
+  def rightdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
     row_length = @grid.length()
     col_length = @grid[0].length()
     expected_len = win_seq.length()
@@ -250,13 +303,7 @@ class Test
         j+=1
       end
 
-      #get count values
-      count = -1#get_fing_func_to_get_value()
-
-      if (count > score[player_index][i])
-        score[player_index][i] = count;
-      end
-      process(win_seq, string, "o", 0, score, i)
+      process_score(win_seq, string, player_token, player_index, score, i)
 
       #puts self.to_s
       puts string
@@ -276,7 +323,7 @@ class Test
     value_hash
   end
 
-  def process(expected_seq, seq, token, player_index, score, column)
+  def process_score(expected_seq, seq, token, player_index, score, column)
 
     value_hash = build_value_hash(expected_seq)
 
@@ -285,25 +332,62 @@ class Test
     expected_seq_len = expected_seq.length
     sub_sequences = []
 
-    seq_copy.gsub!("!", token)
     seq_copy.gsub!("^", "")
-    seq_copy_rev = seq_copy.reverse!()
+    puts seq_copy
+    our_move = seq_copy.index('!')
+    seq_copy.gsub!('!', token)
 
-    puts "seq_P: "+ seq_copy.to_s
+    upperlimit = our_move + expected_seq_len - 1
+    upperlimit = seq_len - 1 unless upperlimit < seq_len
+    lowerlimit = our_move - expected_seq_len + 1
+    lowerlimit = 0 unless lowerlimit >= 0
 
-    (0..seq_len/2).each{ |i|
-      (i..i+expected_seq_len).each {|j|
-        break unless j < seq_copy.length()
-        sub_sequences << seq_copy_rev[j..i+expected_seq_len]
+    puts our_move
+    puts "ul: " + upperlimit.to_s
+    puts "ll: " + lowerlimit.to_s
 
-      }
+    (lowerlimit..upperlimit).each{ |i|
+
+      string = ""
+      n = i
+
+      puts expected_seq_len
+      puts n
+
+      while(n < i + expected_seq_len and n < seq_len)
+
+        if(i > our_move or our_move > n)
+          n+=1
+          next
+        end
+
+        puts "A:"+seq_copy[i..n].to_s
+        sub_sequences << seq_copy[i..n]
+        n+=1
+      end
+
+      puts "-----------"
+      n = i
+
+      while(n > i - expected_seq_len and n >= 0)
+        if(i > our_move or our_move > i)
+          n-=1
+          next
+        end
+
+        puts "B:"+seq_copy[n..i].to_s
+        sub_sequences << seq_copy[n..i]
+        n-=1
+      end
+
     }
 
-    puts sub_sequences
+    sub_sequences.uniq!
+
+    puts sub_sequences.to_s
 
     sub_sequences.each {|sub_seq|
       puts sub_seq
-      puts value_hash
       value = value_hash[sub_seq]
 
       if(score[player_index][column] < value.to_i)
@@ -324,23 +408,6 @@ class Test
 end
 
 test = Test.new()
-puts test.to_s
-x = test.buildRowIndicator()
-score = Array.new(1) { Array.new(7,0) }
-
-puts "hor"
-test.horizscore(0, "otto", nil, x, score)
-
-puts "vert"
-test.vertscore(0, "otto", nil, x, score)
-
-puts "leftdiagscore"
-test.leftdiagscore(0, "otto", nil, x, score)
-
-puts "rightdiagscore"
-test.rightdiagscore(0, "otto", nil, x, score)
-
-puts "---------"
-puts x.to_s
-
-puts test.build_value_hash("otto")
+grid = Array.new(6) { Array.new(7) }
+puts test.to_s 
+test.get_best_move(nil, "otto", grid)
