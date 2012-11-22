@@ -57,11 +57,13 @@ class Test
 
     expected_len = win_seq.length
     best_choice = 0
-    
+
     currentplayer = 0
     current_token = "o"
-    
+
     found = false
+    max_found_value = 0
+
     row_length = @grid.length()
     col_length = @grid[0].length()
     score = Array.new(players.length()) { Array.new(col_length, 0) }
@@ -74,10 +76,11 @@ class Test
 
     #Play to win
     col_length.times { |col|
-      if(score[currentplayer][col] >= expected_len)
-        if(row_indicator[col] <= row)
-          best_choice = j
+      if(score[currentplayer][col] >= 2* expected_len)
+        if(row_indicator[col] <= row_length)
+          best_choice = col
           found = true
+          break
         end
       end
     }
@@ -95,40 +98,70 @@ class Test
         rightdiagscore(index,token, win_seq, grid, row_indicator, score)
       }
     end
-       
+
     #Play to block win
-    if(!found) 
+    if(!found)
       players.each_with_index() { |player, index|
         col_length.times { |col|
-          if(score[index][col] >= expected_len)
-            if(row_indicator[col] <= row)
-              best_choice = j
+          if(score[index][col] >= 2 * expected_len)
+            if(row_indicator[col] <= row_length)
+              best_choice = col
               found  = true
+              break
             end
           end
         }
-        }
-        end
-        
-        if(!found) 
-        col_length.times { |col|
-          if(score[currentplayer][col] == expected_len - 2)
-            if(row_indicator[col] <= row)
-              best_choice = j
-              found  = true
-            end
-          end
-        }
-        end
-
-        if(!found) 
-          best_choice = rand(0...col_length)
-        end
-
-        return best_choice
-        
+      }
     end
 
+    #repeat for lower values to find best move
+
+    #for expected_len * 2 -1 to 0
+    if(!found)
+      (0...expected_len*2).each { |i|
+
+        value = expected_len*2 - i
+        #puts "v: " + value.to_s
+        
+        col_length.times { |col|
+          puts score[currentplayer][col]
+          if(score[currentplayer][col] == value)
+            if(row_indicator[col] <= row_length)
+              best_choice = col
+              found  = true
+              break
+            end
+          end
+        }
+
+        break unless !found
+        
+        players.each_with_index() { |player, index|
+          next unless index != currentplayer
+          col_length.times { |col|
+            if(score[index][col] == value)
+              if(row_indicator[col] <= row_length)
+                best_choice = col
+                found  = true
+                break
+              end
+            end
+          }
+          break unless !found
+        }
+        
+        break unless !found
+
+      }
+    end
+
+    if(!found)
+      best_choice = rand(0...col_length)
+    end
+
+    return best_choice
+
+  end
 
   def horizscore(player_index, player_token, win_seq, gridx, rowindicator, score)
 
@@ -315,11 +348,22 @@ class Test
     length = expected_sequence.length()
 
     length.times { |i|
-      temp = expected_sequence[0..i]
+      next unless i != 0
+      temp = expected_sequence[0...i]
+      temp << "^"
       temp_rev = temp.reverse
-      value_hash[temp] = temp.length()
+      value_hash[temp] = [0..i].length() * 2 + 1
       value_hash[temp_rev] = temp.length()
+
+      temp.insert(0, "^")
+      value_hash[temp] = [0..i].length() * 2 + 2
+
     }
+
+    temp = expected_sequence[0..length]
+    value_hash[temp] = temp.length()*2
+
+    puts "----------" + value_hash.to_s
     value_hash
   end
 
@@ -332,7 +376,7 @@ class Test
     expected_seq_len = expected_seq.length
     sub_sequences = []
 
-    seq_copy.gsub!("^", "")
+    #seq_copy.gsub!("^", "")
     puts seq_copy
     our_move = seq_copy.index('!')
     seq_copy.gsub!('!', token)
@@ -409,5 +453,5 @@ end
 
 test = Test.new()
 grid = Array.new(6) { Array.new(7) }
-puts test.to_s 
+puts test.to_s
 test.get_best_move(nil, "otto", grid)
