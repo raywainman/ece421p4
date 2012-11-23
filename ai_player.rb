@@ -40,20 +40,24 @@ class AIPlayer < Player
   end
 
   def do_rand_move(grid)
+    pre_do_rand_move(grid)
     random = rand(7)
     while grid.is_column_full?(random)
       random = rand(6)
     end
-
+    post_do_rand_move(random, grid)
     random
   end
 
   def description()
-    "AI"
+    pre_description()
+    result = "AI"
+    post_description()
+    result
   end
 
   def strategic_move(opponent_data, grid)
-    
+    pre_strategic_move(opponent_data, grid)
     opponent_tokens = opponent_data.keys
     opponent_winning_seq = []
 
@@ -159,12 +163,15 @@ class AIPlayer < Player
       best_choice = rand(0...col_length)
     end
 
+    post_strategic_move(best_choice, grid)
+    
     return best_choice
 
   end
 
   def horizscore(player_index, player_token, win_seq, grid, rowindicator, score)
-
+    pre_horizscore(player_index, player_token, win_seq, grid, rowindicator, score)
+    
     row_length = grid.get_row_length()
     col_length = grid.get_column_length()
     expected_len = win_seq.length()
@@ -197,40 +204,47 @@ class AIPlayer < Player
 
 
       process_score(win_seq, string, player_token, player_index, score, i)
+      
+      post_horizscore(player_index, player_token, win_seq, grid, rowindicator, score)
     }
 
   end
 
   def append_unless_nil(result_string, grid, checkrow, checkcol)
-
+    pre_append_unless_nil(result_string, grid, checkrow, checkcol)
     temp = grid[checkrow,checkcol]
 
     if(temp == nil)
       result_string << @NULL_SENTINEL
-      return false
+      result = false
     else
       result_string << grid[checkrow,checkcol].to_s
-      return true
+      result = true
     end
 
+    post_append_unless_nil(result, result_string, grid, checkrow, checkcol)
+    result
   end
 
   def prepend_unless_nil(result_string, grid, checkrow, checkcol)
-
+    pre_prepend_unless_nil(result_string, grid, checkrow, checkcol)
     temp = grid[checkrow,checkcol]
 
     if(temp == nil)
       result_string.insert(0, @NULL_SENTINEL)
-      return false
+      result = false
     else
       result_string.insert(0, grid[checkrow,checkcol].to_s)
-      return true
+      result = true
     end
 
+    post_prepend_unless_nil(result, result_string, grid, checkrow, checkcol)
+      result
   end
 
   def vertscore(player_index,player_token, win_seq, grid, rowindicator, score)
-
+    pre_vertscore(player_index,player_token, win_seq, grid, rowindicator, score)
+    
     row_length = grid.get_row_length()
     col_length = grid.get_column_length()
     expected_len = win_seq.length()
@@ -253,10 +267,11 @@ class AIPlayer < Player
       process_score(win_seq, string, player_token, player_index, score, i)
     }
 
+    post_vertscore(player_index,player_token, win_seq, grid, rowindicator, score)
   end
 
   def leftdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
-
+    pre_leftdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
     row_length = grid.get_row_length()
     col_length = grid.get_column_length()
     expected_len = win_seq.length()
@@ -287,10 +302,12 @@ class AIPlayer < Player
       end
 
       process_score(win_seq, string, player_token, player_index, score, i)
+      post_leftdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
     }
   end
 
   def rightdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
+    pre_rightdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
     row_length = grid.get_row_length()
     col_length = grid.get_column_length()
     expected_len = win_seq.length()
@@ -322,11 +339,12 @@ class AIPlayer < Player
 
   
       process_score(win_seq, string, player_token, player_index, score, i)
-
+      post_rightdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
     }
   end
 
   def build_value_hash(expected_sequence)
+    pre_build_value_hash(expected_sequence)
     value_hash = Hash.new(0)
     length = expected_sequence.length()
 
@@ -346,11 +364,13 @@ class AIPlayer < Player
     temp = expected_sequence[0..length]
     value_hash[temp] = temp.length() * @SEQ_WEIGHT
 
+    
+    post_build_value_hash(value_hash)
     value_hash
   end
 
   def process_score(expected_seq, seq, token, player_index, score, column)
-
+    pre_process_score(expected_seq, seq, token, player_index, score, column)
     value_hash = build_value_hash(expected_seq)
     
     seq_copy = seq.clone
@@ -407,11 +427,11 @@ class AIPlayer < Player
       end
 
     }
-
+    post_process_score(expected_seq, seq, token, player_index, score, column)
   end
 
   def buildRowIndicator(grid)
-
+    pre_buildRowIndicator(grid)
     row_length = grid.get_row_length()
     col_length = grid.get_column_length()
 
@@ -432,7 +452,7 @@ class AIPlayer < Player
         end
       }
     }
-
+    post_buildRowIndicator(grid, row_indicator)
     return row_indicator
 
   end
