@@ -10,7 +10,7 @@ class AIPlayer < Player
   
   def initialize(difficulty)
     initialize_preconditions(difficulty)
-    @difficulty = difficulty
+    @difficulty = difficulty = 0
     
     @SEQ_WEIGHT = 2
     @MY_MOVE_SENTINEL = "!"
@@ -164,7 +164,6 @@ class AIPlayer < Player
     end
 
     post_strategic_move(best_choice, grid)
-    
     return best_choice
 
   end
@@ -192,7 +191,7 @@ class AIPlayer < Player
       end
       
       count, checkcol, checkrow = 0, i, rowindicator[i]
-      string << @MY_MOVE_SENTINEL
+      string << @MY_MOVE_SENTINEL.clone()
 
       #right
       j = 0
@@ -248,14 +247,15 @@ class AIPlayer < Player
     row_length = grid.get_row_length()
     col_length = grid.get_column_length()
     expected_len = win_seq.length()
-
+    string = ""
+    
     col_length.times{ |i|
 
       count, checkrow = 0, rowindicator[i]
 
       next unless checkrow >= 0
 
-      string = @MY_MOVE_SENTINEL
+      string = @MY_MOVE_SENTINEL.clone
 
       j = 0
       while(checkrow < row_length - 1  && j < expected_len - 1)
@@ -418,7 +418,7 @@ class AIPlayer < Player
     }
 
     sub_sequences.uniq!
-
+    
     sub_sequences.each {|sub_seq|
       value = value_hash[sub_seq]
 
