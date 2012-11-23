@@ -10,7 +10,7 @@ class AIPlayer < Player
   
   def initialize(difficulty)
     initialize_preconditions(difficulty)
-    @difficulty = difficulty = 0
+    @difficulty = difficulty
     
     @SEQ_WEIGHT = 2
     @MY_MOVE_SENTINEL = "!"
