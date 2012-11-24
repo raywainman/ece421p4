@@ -39,6 +39,7 @@ class HelloGlade
     #Setting max number of players
     @max_players=4
     @columns=8
+    @col_number=0
   end
   
   #Generic method for quitting application
@@ -57,7 +58,9 @@ class HelloGlade
   end
   
 #+++++++++++++++++++++Helper functions, not signal handlers!++++++++++++++++++++
-  def show_arrow(n)
+  #Function that shows the corresponding arrow based on the value
+  #stored in the global variable "col_number"
+  def show_arrow()
     #hide all arrows first
     @arrow1.hide
     @arrow2.hide
@@ -65,8 +68,8 @@ class HelloGlade
     @arrow4.hide
     @arrow5.hide
     @arrow6.hide
-    #Then show the one given in n
-    case n
+    #Then show the one stored
+    case @col_number
     when 1
       @arrow1.show
     when 2
@@ -80,7 +83,17 @@ class HelloGlade
     when 6
       @arrow6.show
     end
-  end  
+  end 
+  
+  #Method that modifies the global variable of the column selected
+  #when passing the X coordinate
+  def set_column_selected(x)
+     #get the window width
+     board_width=@board.size[0]
+     column_width=board_width/@columns
+     #get the number of arrow that should be visible
+     @col_number = (x/column_width).floor
+  end 
   
 #-----------------------Click signals for buttons-----------------
   #PLUS button
@@ -111,19 +124,15 @@ class HelloGlade
   
   #When the mouse is clicked in the board
   def on_eventbox1_button_press_event
+    puts "Column #{@col_number} selected"
   end 
   
   #When the mouse is moved over the board
   def on_eventbox1_motion_notify_event(widget,event)
-    #get x coordinate
-    x_cord=event.x
-    #get the window width
-    board_width=@board.size[0]
-    column_width=board_width/@columns
-    #get the number of arrow that should be visible
-    col_number = (x_cord/column_width).floor
+    #get the column
+    set_column_selected(event.x)   
     #show corresponding arrow
-    show_arrow(col_number)
+    show_arrow()
   end
   
 end
