@@ -125,17 +125,17 @@ class MainView
   def update(state)
     state.grid.each_with_index { |e, row, col|
       if e == "O"
-        @imageArray[row][col].set("piece_O.png")
+        @imageArray[row][col].set("resources/piece_O.png")
       elsif e == "T"
-        @imageArray[row][col].set("piece_T.png")
+        @imageArray[row][col].set("resources/piece_T.png")
       elsif e == "R"
-        @imageArray[row][col].set("piece_red.png")
+        @imageArray[row][col].set("resources/piece_red.png")
       elsif e == "B"
-        @imageArray[row][col].set("piece_yellow.png")
+        @imageArray[row][col].set("resources/piece_yellow.png")
       elsif e == "G"
-        @imageArray[row][col].set("piece_green.png")
+        @imageArray[row][col].set("resources/piece_green.png")
       elsif e == "Y"
-        @imageArray[row][col].set("piece_yellow.png")
+        @imageArray[row][col].set("resources/piece_yellow.png")
       end
     }
   end

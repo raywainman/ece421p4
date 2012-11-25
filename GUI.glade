@@ -104,7 +104,7 @@
                       <object class="GtkImage" id="img35">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -119,7 +119,7 @@
                       <object class="GtkImage" id="img28">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -134,7 +134,7 @@
                       <object class="GtkImage" id="img21">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -149,7 +149,7 @@
                       <object class="GtkImage" id="img14">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -164,7 +164,7 @@
                       <object class="GtkImage" id="img7">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -179,7 +179,7 @@
                       <object class="GtkImage" id="img0">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -194,7 +194,7 @@
                       <object class="GtkImage" id="img36">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -259,7 +259,7 @@
                       <object class="GtkImage" id="img29">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -274,7 +274,7 @@
                       <object class="GtkImage" id="img22">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -289,7 +289,7 @@
                       <object class="GtkImage" id="img15">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -304,7 +304,7 @@
                       <object class="GtkImage" id="img8">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -319,7 +319,7 @@
                       <object class="GtkImage" id="img1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -334,7 +334,7 @@
                       <object class="GtkImage" id="img37">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -349,7 +349,7 @@
                       <object class="GtkImage" id="img30">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -364,7 +364,7 @@
                       <object class="GtkImage" id="img23">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -379,7 +379,7 @@
                       <object class="GtkImage" id="img16">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -394,7 +394,7 @@
                       <object class="GtkImage" id="img9">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -409,7 +409,7 @@
                       <object class="GtkImage" id="img2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -424,7 +424,7 @@
                       <object class="GtkImage" id="img38">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -439,7 +439,7 @@
                       <object class="GtkImage" id="img31">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -454,7 +454,7 @@
                       <object class="GtkImage" id="img24">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -469,7 +469,7 @@
                       <object class="GtkImage" id="img17">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -482,7 +482,7 @@
                       <object class="GtkImage" id="img10">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -495,7 +495,7 @@
                       <object class="GtkImage" id="img3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">4</property>
@@ -508,7 +508,7 @@
                       <object class="GtkImage" id="img39">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -521,7 +521,7 @@
                       <object class="GtkImage" id="img32">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -534,7 +534,7 @@
                       <object class="GtkImage" id="img25">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -547,7 +547,7 @@
                       <object class="GtkImage" id="img18">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -560,7 +560,7 @@
                       <object class="GtkImage" id="img11">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -573,7 +573,7 @@
                       <object class="GtkImage" id="img4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">5</property>
@@ -586,7 +586,7 @@
                       <object class="GtkImage" id="img40">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -599,7 +599,7 @@
                       <object class="GtkImage" id="img33">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -612,7 +612,7 @@
                       <object class="GtkImage" id="img26">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -625,7 +625,7 @@
                       <object class="GtkImage" id="img19">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -638,7 +638,7 @@
                       <object class="GtkImage" id="img12">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -651,7 +651,7 @@
                       <object class="GtkImage" id="img5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -664,7 +664,7 @@
                       <object class="GtkImage" id="img41">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">7</property>
@@ -677,7 +677,7 @@
                       <object class="GtkImage" id="img34">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">7</property>
@@ -690,7 +690,7 @@
                       <object class="GtkImage" id="img27">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">7</property>
@@ -703,7 +703,7 @@
                       <object class="GtkImage" id="img20">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">7</property>
@@ -716,7 +716,7 @@
                       <object class="GtkImage" id="img13">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">7</property>
@@ -729,7 +729,7 @@
                       <object class="GtkImage" id="img6">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">piece_empty.png</property>
+                        <property name="pixbuf">resources/piece_empty.png</property>
                       </object>
                       <packing>
                         <property name="left_attach">7</property>
