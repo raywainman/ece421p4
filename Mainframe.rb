@@ -122,6 +122,7 @@ class HelloGlade
   
   #Method for showing and activating the spinner.
   #Also pushes the message to the status bar
+  #CALL THIS WHEN THE IT'S THE OPPONENT TURN!
   def activate_spinner()
     @spinner1.show
     @spinner1.active=true
@@ -129,6 +130,7 @@ class HelloGlade
   end
   
   #Method for stopping and hiding the spinner
+  #CALL THIS WHEN IT IS THE PLAYER'S TURN!
   def deactivate_spinner()
     @spinner1.active=false
     @spinner1.hide
@@ -175,7 +177,6 @@ class HelloGlade
   
   #FOR UPDATING THE VIEW
   def update(state)
-    #nothing here yet
     #update_board_images(state.array)
   end
   
