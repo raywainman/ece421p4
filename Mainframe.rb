@@ -1,8 +1,16 @@
 require 'rubygems' 
 require 'gtk2' 
+require './contracts/view_update_contracts'
+
+# User interface for the connect4/otto game
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
 
 class HelloGlade
-   
+   include View_update_contracts
   #Constructor
   #Initializes GUI via .glade file and gets all the widgets via "get_all_widgets"  
   def initialize  
@@ -127,7 +135,14 @@ class HelloGlade
     @boardstatusbar.push(0,"Your turn.")
   end
   
-#-----------------------Click signals for buttons-----------------
+  #Updates view based on array passed as parametre
+  def update_board_images(modelArray)
+    update_board_preconditions(modelArray)
+    
+    update_board_postconditions(modelArray)
+  end
+  
+#-------------------------------Signal handlers--------------------------------------
   #PLUS button
   def on_button4_clicked
     text=Integer(@entry1.text)
@@ -161,24 +176,23 @@ class HelloGlade
   #FOR UPDATING THE VIEW
   def update(state)
     #nothing here yet
+    #update_board_images(state.array)
   end
   
-  #When the mouse is clicked inside the board
+  #When the mouse is clicked inside the board. Here is where
+  #the state object is sent to the model
   def on_eventbox1_button_release_event
-    #puts "Column #{@col_selected} selected"
     if @col_selected>0 and @col_selected<(@columns-1)
       
-      #@boardstatusbar.push(0,@test.to_s())
-    
       if @test.odd?
         activate_spinner()
-        @imageArray[@test].set("piece_red.png")
+        @imageArray[@test].set("piece_T.png")
         else
         deactivate_spinner()
-        @imageArray[@test].set("piece_yellow.png")
-      end
-      
+        @imageArray[@test].set("piece_O.png")
+      end     
       @test=@test+1
+      
     end
     
   end 
