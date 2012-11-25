@@ -17,13 +17,18 @@ class HelloGlade
       Gtk.main()
   end
   
+  #Method called from constructor to get all the widgets 
+  #into useful objects.
   def get_all_widgets
+    #Get all miscellaneous widgets
     @spinner1=@builder.get_object("spinner1")
     @entry1=@builder.get_object("entry1")
     @aboutdialog1=@builder.get_object("aboutdialog1")
     @board=@builder.get_object("board")
     @boardstatusbar=@builder.get_object("statusbar2")
     @eventbox1=@builder.get_object("eventbox1")
+    @radiobutton1=@builder.get_object("radiobutton1")
+    @radiobutton2=@builder.get_object("radiobutton2")
     #Get all arrows
     @arrow1=@builder.get_object("arrow1")
     @arrow2=@builder.get_object("arrow2")
@@ -31,15 +36,24 @@ class HelloGlade
     @arrow4=@builder.get_object("arrow4")
     @arrow5=@builder.get_object("arrow5")
     @arrow6=@builder.get_object("arrow6")
+    @arrow7=@builder.get_object("arrow7")
+    #Get all images
+    @imageArray=Array.new(43)
+    (1..42).each do |i|
+      imageString = "image" + i.to_s()
+      @imageArray[i]=@builder.get_object(imageString)
+    end
     #Set event handler for eventbox
     @eventbox1.set_events(Gdk::Event::POINTER_MOTION_MASK)
   end
   
+  #Initializing all global vars
   def initialize_vars
-    #Setting max number of players
     @max_players=4
-    @columns=8
-    @col_number=0
+    @columns=9
+    @col_selected=0
+    @test=1
+    @game_mode=nil
   end
   
   #Generic method for quitting application
@@ -68,8 +82,9 @@ class HelloGlade
     @arrow4.hide
     @arrow5.hide
     @arrow6.hide
+    @arrow7.hide
     #Then show the one stored
-    case @col_number
+    case @col_selected
     when 1
       @arrow1.show
     when 2
@@ -82,18 +97,35 @@ class HelloGlade
       @arrow5.show
     when 6
       @arrow6.show
+    when 7
+      @arrow7.show
     end
   end 
   
   #Method that modifies the global variable of the column selected
-  #when passing the X coordinate
+  #when passing the X coordinate. Called everytime the mouse moves
   def set_column_selected(x)
      #get the window width
      board_width=@board.size[0]
      column_width=board_width/@columns
      #get the number of arrow that should be visible
-     @col_number = (x/column_width).floor
+     @col_selected = (x/column_width).floor
   end 
+  
+  #Method for showing and activating the spinner.
+  #Also pushes the message to the status bar
+  def activate_spinner()
+    @spinner1.show
+    @spinner1.active=true
+    @boardstatusbar.push(0,"Waiting for opponent's move...")
+  end
+  
+  #Method for stopping and hiding the spinner
+  def deactivate_spinner()
+    @spinner1.active=false
+    @spinner1.hide
+    @boardstatusbar.push(0,"Your turn.")
+  end
   
 #-----------------------Click signals for buttons-----------------
   #PLUS button
@@ -112,8 +144,17 @@ class HelloGlade
     end
   end
   
-  #start game button
+  #Starts the game by saving the game mode in @game_mode
+  #as a string, and shows the window where the board is.
   def on_button1_clicked
+    #Set game type based on radio buttons
+    if @radiobutton1.active?
+      @game_mode="Connect4"
+    else
+      @game_mode="OTTO"
+    end
+    #Then show the board
+    @board.title=@game_mode+" Playing Area"
     @board.show()
   end
   
@@ -122,9 +163,24 @@ class HelloGlade
     #nothing here yet
   end
   
-  #When the mouse is clicked in the board
-  def on_eventbox1_button_press_event
-    puts "Column #{@col_number} selected"
+  #When the mouse is clicked inside the board
+  def on_eventbox1_button_release_event
+    #puts "Column #{@col_selected} selected"
+    if @col_selected>0 and @col_selected<(@columns-1)
+      
+      #@boardstatusbar.push(0,@test.to_s())
+    
+      if @test.odd?
+        activate_spinner()
+        @imageArray[@test].set("piece_red.png")
+        else
+        deactivate_spinner()
+        @imageArray[@test].set("piece_yellow.png")
+      end
+      
+      @test=@test+1
+    end
+    
   end 
   
   #When the mouse is moved over the board
