@@ -9,7 +9,7 @@ module OttoContracts
 
   def get_player_label_postconditions(result)
     assert result != nil, "result must not be nil"
-    assert @labels.include?(result), "result is not in original array"
+    assert Otto::labels.include?(result), "result is not in original array"
   end
 
   def winning_token_preconditions(player)
@@ -24,7 +24,7 @@ module OttoContracts
   end
 
   def class_invariant()
-    assert @@labels != nil, "labels static array must not be nil"
-    assert @@labels.size == 2, "labels static array must not change"
+    assert Otto::labels != nil, "labels static array must not be nil"
+    assert Otto::labels.size == 2, "labels static array must not change"
   end
 end

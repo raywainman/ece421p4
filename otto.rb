@@ -1,6 +1,13 @@
 require_relative "./game_type"
+require_relative "./contracts/otto_contracts"
 
 class Otto < GameType
+  include OttoContracts
+  
+  def self.labels
+    return @@labels
+  end
+
   @@labels = ["O", "T"]
 
   def initialize
