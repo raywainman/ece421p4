@@ -1,13 +1,14 @@
-require_relative "./contracts/game_contracts"
+require_relative "./contracts/state_contracts"
 
 class State
-  attr_reader :grid, :players, :active_player, :game_type
-  def initialize(grid, players, active_player, game_type)
-    initialize_preconditions(grid, players, active_player, game_type)
+  include StateContracts
+  
+  attr_reader :grid, :players, :active_player
+  def initialize(grid, players, active_player)
+    initialize_preconditions(grid, players, active_player)
     @grid = grid
     @players = players
     @active_player = active_player
-    @game_type = game_type
     initialize_postconditions()
   end
 end

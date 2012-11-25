@@ -3,11 +3,13 @@ require_relative "./human_player"
 require_relative "./grid"
 require_relative "./ai_player"
 require_relative "./contracts/game_contracts"
+require_relative "./state"
 
 class Game
   include GameContracts
   # Creates a new instance of the game given a GameType and a list of Player objects
-  def initialize(game_type, players)
+  # TODO: UPDATE CONTRACTS FOR VIEW
+  def initialize(game_type, players, view)
     initialize_preconditions(game_type, players)
     @game_type = game_type
     @players = players
@@ -18,6 +20,7 @@ class Game
     }
     @grid = Grid.new
     @active_player = 0
+    @view = view
     class_invariant()
     initialize_postconditions()
   end
@@ -30,6 +33,14 @@ class Game
     @active_player = 0
     class_invariant()
     reset_postconditions()
+  end
+
+  # Makes a move for the current player
+  def make_move(column)
+    @grid.make_move(@game_type.get_player_label(@active_player), column)
+    @active_player = (@active_player + 1) % @players.size
+    puts @grid.to_s
+    @view.update(State.new(@grid, @players, @active_player))
   end
 
   def play()
@@ -53,6 +64,6 @@ class Game
   end
 end
 
-players = [HumanPlayer.new, AIPlayer.new(0.5), AIPlayer.new(0.5)]
-game = Game.new(Connect4.new, players)
-game.play
+#players = [HumanPlayer.new, AIPlayer.new(0.5), AIPlayer.new(0.5)]
+#game = Game.new(Connect4.new, players)
+#game.play

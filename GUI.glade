@@ -2,41 +2,6 @@
 <interface>
   <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkAboutDialog" id="aboutdialog1">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="resizable">False</property>
-    <property name="type_hint">dialog</property>
-    <property name="program_name">ECE421 Project 4</property>
-    <property name="comments" translatable="yes">Fall 2012, U of A</property>
-    <property name="authors"/>
-    <property name="documenters"/>
-    <property name="artists"/>
-    <signal name="close" handler="on_aboutdialog1_close" swapped="no"/>
-    <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkAdjustment" id="adjustment1">
     <property name="upper">100</property>
     <property name="step_increment">1</property>
@@ -54,115 +19,6 @@
       <object class="GtkVBox" id="vbox6">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <child>
-          <object class="GtkMenuBar" id="menubar2">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkMenuItem" id="menuitem2">
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_File</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="menu2">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem6">
-                        <property name="label">gtk-new</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem7">
-                        <property name="label">gtk-open</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem8">
-                        <property name="label">gtk-save</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem9">
-                        <property name="label">gtk-save-as</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSeparatorMenuItem" id="separatormenuitem2">
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem11">
-                        <property name="label">gtk-quit</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="gtk_main_quit" swapped="no"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="menuitem6">
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Help</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="menu5">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem16">
-                        <property name="label">gtk-about</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkEventBox" id="eventbox1">
             <property name="visible">True</property>
@@ -245,7 +101,7 @@
                       <placeholder/>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image1">
+                      <object class="GtkImage" id="img35">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -260,7 +116,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image2">
+                      <object class="GtkImage" id="img28">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -275,7 +131,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image3">
+                      <object class="GtkImage" id="img21">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -290,7 +146,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image4">
+                      <object class="GtkImage" id="img14">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -305,7 +161,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image5">
+                      <object class="GtkImage" id="img7">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -320,7 +176,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image6">
+                      <object class="GtkImage" id="img0">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -335,7 +191,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image7">
+                      <object class="GtkImage" id="img36">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -400,7 +256,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image8">
+                      <object class="GtkImage" id="img29">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -415,7 +271,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image9">
+                      <object class="GtkImage" id="img22">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -430,7 +286,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image10">
+                      <object class="GtkImage" id="img15">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -445,7 +301,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image11">
+                      <object class="GtkImage" id="img8">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -460,7 +316,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image12">
+                      <object class="GtkImage" id="img1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -475,7 +331,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image13">
+                      <object class="GtkImage" id="img37">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -490,7 +346,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image14">
+                      <object class="GtkImage" id="img30">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -505,7 +361,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image15">
+                      <object class="GtkImage" id="img23">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -520,7 +376,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image16">
+                      <object class="GtkImage" id="img16">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -535,7 +391,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image17">
+                      <object class="GtkImage" id="img9">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -550,7 +406,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image18">
+                      <object class="GtkImage" id="img2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -565,7 +421,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image19">
+                      <object class="GtkImage" id="img38">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -580,7 +436,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image20">
+                      <object class="GtkImage" id="img31">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -595,7 +451,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image21">
+                      <object class="GtkImage" id="img24">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -610,7 +466,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image22">
+                      <object class="GtkImage" id="img17">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -623,7 +479,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image23">
+                      <object class="GtkImage" id="img10">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -636,7 +492,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image24">
+                      <object class="GtkImage" id="img3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -649,7 +505,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image25">
+                      <object class="GtkImage" id="img39">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -662,7 +518,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image26">
+                      <object class="GtkImage" id="img32">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -675,7 +531,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image27">
+                      <object class="GtkImage" id="img25">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -688,7 +544,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image28">
+                      <object class="GtkImage" id="img18">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -701,7 +557,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image29">
+                      <object class="GtkImage" id="img11">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -714,7 +570,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image30">
+                      <object class="GtkImage" id="img4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -727,7 +583,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image31">
+                      <object class="GtkImage" id="img40">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -740,7 +596,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image32">
+                      <object class="GtkImage" id="img33">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -753,7 +609,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image33">
+                      <object class="GtkImage" id="img26">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -766,7 +622,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image34">
+                      <object class="GtkImage" id="img19">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -779,7 +635,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image35">
+                      <object class="GtkImage" id="img12">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -792,7 +648,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image36">
+                      <object class="GtkImage" id="img5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -805,7 +661,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image37">
+                      <object class="GtkImage" id="img41">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -818,7 +674,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image38">
+                      <object class="GtkImage" id="img34">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -831,7 +687,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image39">
+                      <object class="GtkImage" id="img27">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -844,7 +700,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image40">
+                      <object class="GtkImage" id="img20">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -857,7 +713,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image41">
+                      <object class="GtkImage" id="img13">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -870,7 +726,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image42">
+                      <object class="GtkImage" id="img6">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="pixbuf">piece_empty.png</property>
@@ -1063,116 +919,6 @@
         <property name="can_focus">False</property>
         <property name="spacing">5</property>
         <child>
-          <object class="GtkMenuBar" id="menubar1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkMenuItem" id="menuitem1">
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_File</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="menu1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem1">
-                        <property name="label">gtk-new</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem2">
-                        <property name="label">gtk-open</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem3">
-                        <property name="label">gtk-save</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem4">
-                        <property name="label">gtk-save-as</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSeparatorMenuItem" id="separatormenuitem1">
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem5">
-                        <property name="label">gtk-quit</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="gtk_main_quit" swapped="no"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="menuitem4">
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Help</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="menu3">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem10">
-                        <property name="label">gtk-about</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="on_imagemenuitem10_activate" swapped="no"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkLabel" id="label2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -1270,6 +1016,7 @@
                         <property name="receives_default">False</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
+                        <signal name="toggled" handler="on_mode_changed" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -1346,13 +1093,13 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkButton" id="button4">
+                  <object class="GtkButton" id="plus_button">
                     <property name="label" translatable="yes">+</property>
                     <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_button4_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_plus_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -1382,7 +1129,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button5">
+                  <object class="GtkButton" id="minus_button">
                     <property name="label" translatable="yes">-
 </property>
                     <property name="use_action_appearance">False</property>
@@ -1390,7 +1137,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_button5_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_minus_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -1419,14 +1166,14 @@
             <property name="n_rows">3</property>
             <property name="n_columns">3</property>
             <child>
-              <object class="GtkButton" id="button1">
+              <object class="GtkButton" id="start_button">
                 <property name="label" translatable="yes">Start</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="xalign">0.46000000834465027</property>
-                <signal name="clicked" handler="on_button1_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_start_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>

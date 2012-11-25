@@ -182,39 +182,3 @@ class GameType
     result
   end
 end
-
-require_relative "./grid"
-
-grid = Grid.new()
-
-grid[0,0] = "x"
-grid[0,1] = "x"
-grid[0,3] = "x"
-grid[0,4] = "x"
-grid[0,5] = "x"
-grid[0,6] = "x"
-
-grid[1,1] = "o"
-grid[2,1] = "o"
-
-grid[0,0] = "t"
-grid[1,0] = "t"
-grid[2,0] = "t"
-grid[3,0] = "t"
-
-grid[4,3] = "o"
-grid[5,3] = "o"
-grid[2,3] = "o"
-grid[3,4] = "t"
-grid[4,5] = "t"
-grid[5,6] = "o"
-
-puts grid.to_s
-
-test = GameType.new()
-puts "xxxx: "+ test.evaluate_win(grid, "xxxx").to_s
-puts "tttt: "+ test.evaluate_win(grid, "tttt").to_s
-puts "xoot: "+ test.evaluate_win(grid, "xoot").to_s
-puts "otto: "+ test.evaluate_win(grid, "otto").to_s
-puts "oooo: "+ test.evaluate_win(grid, "oooo").to_s
-puts "xoo : "+ test.evaluate_win(grid, "xoo ").to_s
