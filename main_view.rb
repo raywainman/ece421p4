@@ -156,21 +156,10 @@ class MainView
 
   #FOR UPDATING THE VIEW
   def update(state)
-    puts "Updating View"
     #updates board
     state.grid.each_with_index { |e, row, col|
-      if e == "O"
-        @imageArray[row][col].set("resources/piece_O.png")
-      elsif e == "T"
-        @imageArray[row][col].set("resources/piece_T.png")
-      elsif e == "R"
-        @imageArray[row][col].set("resources/piece_red.png")
-      elsif e == "B"
-        @imageArray[row][col].set("resources/piece_blue.png")
-      elsif e == "G"
-        @imageArray[row][col].set("resources/piece_green.png")
-      elsif e == "Y"
-        @imageArray[row][col].set("resources/piece_yellow.png")
+      if e != nil
+        @imageArray[row][col].set("resources/piece_" + e.to_s + ".png")
       end
     }
     #updates active player
