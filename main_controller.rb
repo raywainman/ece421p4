@@ -92,6 +92,7 @@ class MainController
       players << AIPlayer.new(difficulty)
     }
     @game = Game.new(game_type, players, @view)
+    @view.reset_board_images()
     #Then show the board
     @view.show_board(game_type.game_name + " Playing Area")
   end
@@ -110,4 +111,22 @@ class MainController
     @view.show_arrow()
   end
 
+  #When the user clicks on the button contained
+  #in the winner dialog. Simply hides the two windows  
+  def on_return_to_main_button_clicked
+    @view.win_dialog.hide()
+    @view.board.hide()    
+  end
+  
+  #Signal handler that prevents the board from being deleted
+  #and hides it instead
+  def on_board_delete_event
+    @view.board.hide_on_delete()
+  end
+  
+  def on_win_dialog_delete_event
+    @view.board.hide()
+    @view.win_dialog.hide_on_delete()
+  end
+  
 end

@@ -15,7 +15,8 @@ class MainView
   include MainViewContracts
 
   attr_reader :spinner, :humans, :computers, :aboutdialog, :board, :boardstatusbar, :eventbox,
-  :connect4_radiobutton, :otto_radiobutton, :arrows, :imageArray, :col_selected, :easy, :medium
+  :connect4_radiobutton, :otto_radiobutton, :arrows, :imageArray, :col_selected, :easy, :medium,
+  :win_dialog
 
   @col_selected=0
   # Initializes GUI via .glade file and gets all the widgets
@@ -48,6 +49,8 @@ class MainView
     @spinner=@builder.get_object("spinner1")
     @aboutdialog=@builder.get_object("aboutdialog1")
     @board=@builder.get_object("board")
+    @win_dialog=@builder.get_object("win_dialog")
+    @win_dialog_label=@builder.get_object("winner_label")
     @boardstatusbar=@builder.get_object("statusbar2")
     @eventbox=@builder.get_object("eventbox1")
     @connect4_radiobutton=@builder.get_object("radiobutton1")
@@ -117,12 +120,22 @@ class MainView
     @boardstatusbar.push(0,"Your turn.")
   end
 
-  # Updates view based on array passed as parameter
-  def update_board_images(modelArray)
-    update_board_preconditions(modelArray)
-
-    update_board_postconditions(modelArray)
+  # Reset the board images to the empty pieces
+  def reset_board_images()
+    @imageArray.each_index { |row|
+      @imageArray[0].each_index { |col|
+        @imageArray[row][col].set("resources/piece_empty.png")
+      }
+    }
   end
+  
+  #Shows the dialog with the winning player (passed as parameter)
+  def show_win(winner)
+    show_string=winner+" wins!"
+    @win_dialog_label.text=show_string
+    @win_dialog.show
+  end
+  
 
   #FOR UPDATING THE VIEW
   def update(state)
