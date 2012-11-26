@@ -93,6 +93,7 @@ class MainController
     }
     @game = Game.new(game_type, players, @view)
     @view.reset_board_images()
+    #@view.hide_all_player_labels_and_images
     #Then show the board
     @view.show_board(game_type.game_name + " Playing Area")
   end
@@ -124,6 +125,7 @@ class MainController
     @view.board.hide_on_delete()
   end
   
+  #Same as above: will only hide the dialog, not delete it
   def on_win_dialog_delete_event
     @view.board.hide()
     @view.win_dialog.hide_on_delete()

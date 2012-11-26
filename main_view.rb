@@ -16,7 +16,7 @@ class MainView
 
   attr_reader :spinner, :humans, :computers, :aboutdialog, :board, :boardstatusbar, :eventbox,
   :connect4_radiobutton, :otto_radiobutton, :arrows, :imageArray, :col_selected, :easy, :medium,
-  :win_dialog
+  :win_dialog, :player_labels, :player_images
 
   @col_selected=0
   # Initializes GUI via .glade file and gets all the widgets
@@ -63,6 +63,13 @@ class MainView
     @arrows = []
     (1..7).each { |col|
       @arrows << @builder.get_object("arrow" + col.to_s)
+    }
+    #Get all player labels and images
+    @player_labels = []
+    @player_images = []
+    (1..4).each { |player|
+      @player_labels << @builder.get_object("p"+player.to_s+"_label")
+      @player_images << @builder.get_object("p"+player.to_s+"_image")
     }
     #Get all images
     @imageArray  = Array.new(6) { Array.new(7) }
@@ -136,10 +143,21 @@ class MainView
     @win_dialog.show
   end
   
+  #Hide all labels and images depicting the players.
+  def hide_all_player_labels_and_images
+    @player_images.each { |image|
+      image.hide()
+    }
+    @player_labels.each { |label|
+          label.hide()
+        }
+  end
+  
 
   #FOR UPDATING THE VIEW
   def update(state)
     puts "Updating View"
+    #updates board
     state.grid.each_with_index { |e, row, col|
       if e == "O"
         @imageArray[row][col].set("resources/piece_O.png")
@@ -155,6 +173,8 @@ class MainView
         @imageArray[row][col].set("resources/piece_yellow.png")
       end
     }
+    #updates active player
+    
   end
 end
 
