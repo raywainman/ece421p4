@@ -90,27 +90,6 @@
                       <placeholder/>
                     </child>
                     <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
                       <object class="GtkImage" id="img35">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -213,16 +192,6 @@
                         <property name="bottom_attach">8</property>
                         <property name="x_options">GTK_EXPAND</property>
                         <property name="y_options">GTK_EXPAND</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkFixed" id="fixed17">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">2</property>
-                        <property name="right_attach">3</property>
                       </packing>
                     </child>
                     <child>
@@ -749,13 +718,6 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label3">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">You are</property>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkSpinner" id="spinner1">
                         <property name="can_focus">False</property>
                       </object>
@@ -776,15 +738,131 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="image43">
+                      <object class="GtkFixed" id="fixed1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="stock">gtk-missing-image</property>
+                        <child>
+                          <object class="GtkImage" id="p1_image">
+                            <property name="width_request">20</property>
+                            <property name="height_request">20</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="pixbuf">resources/red.png</property>
+                          </object>
+                          <packing>
+                            <property name="x">14</property>
+                            <property name="y">22</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="p2_image">
+                            <property name="width_request">20</property>
+                            <property name="height_request">20</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="pixbuf">resources/yellow.png</property>
+                          </object>
+                          <packing>
+                            <property name="x">14</property>
+                            <property name="y">62</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="p1_label">
+                            <property name="width_request">80</property>
+                            <property name="height_request">41</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Player 1
+</property>
+                          </object>
+                          <packing>
+                            <property name="x">27</property>
+                            <property name="y">22</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="p2_label">
+                            <property name="width_request">78</property>
+                            <property name="height_request">31</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Player 2</property>
+                          </object>
+                          <packing>
+                            <property name="x">27</property>
+                            <property name="y">55</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="p3_image">
+                            <property name="width_request">20</property>
+                            <property name="height_request">20</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="pixbuf">resources/green.png</property>
+                          </object>
+                          <packing>
+                            <property name="x">120</property>
+                            <property name="y">22</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="p4_image">
+                            <property name="width_request">20</property>
+                            <property name="height_request">20</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="pixbuf">resources/blue.png</property>
+                          </object>
+                          <packing>
+                            <property name="x">120</property>
+                            <property name="y">62</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="p3_label">
+                            <property name="width_request">81</property>
+                            <property name="height_request">25</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Player 3</property>
+                          </object>
+                          <packing>
+                            <property name="x">133</property>
+                            <property name="y">22</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="p4_label">
+                            <property name="width_request">88</property>
+                            <property name="height_request">31</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Player 4</property>
+                          </object>
+                          <packing>
+                            <property name="x">130</property>
+                            <property name="y">58</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="bottom_attach">2</property>
                       </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
                     </child>
                   </object>
                   <packing>
