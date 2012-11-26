@@ -14,8 +14,8 @@ require_relative "./contracts/main_view_contracts"
 class MainView
   include MainViewContracts
 
-  attr_reader :spinner, :entry, :aboutdialog, :board, :boardstatusbar, :eventbox,
-  :connect4_radiobutton, :otto_radiobutton, :arrows, :imageArray, :col_selected
+  attr_reader :spinner, :humans, :computers, :aboutdialog, :board, :boardstatusbar, :eventbox,
+  :connect4_radiobutton, :otto_radiobutton, :arrows, :imageArray, :col_selected, :easy, :medium
 
   @col_selected=0
   # Initializes GUI via .glade file and gets all the widgets
@@ -46,13 +46,16 @@ class MainView
   def get_all_widgets
     #Get all miscellaneous widgets
     @spinner=@builder.get_object("spinner1")
-    @entry=@builder.get_object("entry1")
     @aboutdialog=@builder.get_object("aboutdialog1")
     @board=@builder.get_object("board")
     @boardstatusbar=@builder.get_object("statusbar2")
     @eventbox=@builder.get_object("eventbox1")
     @connect4_radiobutton=@builder.get_object("radiobutton1")
     @otto_radiobutton=@builder.get_object("radiobutton2")
+    @humans=@builder.get_object("spinbutton1")
+    @computers=@builder.get_object("spinbutton2")
+    @easy=@builder.get_object("radiobutton3")
+    @medium=@builder.get_object("radiobutton4")
     #Get all arrows
     @arrows = []
     (1..7).each { |col|
@@ -123,6 +126,7 @@ class MainView
 
   #FOR UPDATING THE VIEW
   def update(state)
+    puts "Updating View"
     state.grid.each_with_index { |e, row, col|
       if e == "O"
         @imageArray[row][col].set("resources/piece_O.png")
@@ -131,7 +135,7 @@ class MainView
       elsif e == "R"
         @imageArray[row][col].set("resources/piece_red.png")
       elsif e == "B"
-        @imageArray[row][col].set("resources/piece_yellow.png")
+        @imageArray[row][col].set("resources/piece_blue.png")
       elsif e == "G"
         @imageArray[row][col].set("resources/piece_green.png")
       elsif e == "Y"

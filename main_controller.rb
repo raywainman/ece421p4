@@ -33,10 +33,39 @@ class MainController
     end
   end
 
+  def on_humans_changed
+    sum = @view.humans.text.to_i + @view.computers.text.to_i
+    if @view.otto_radiobutton.active?
+      if sum > 2
+        @view.humans.text = 2.to_s
+        @view.computers.text = 0.to_s
+      elsif sum == 1
+        @view.computers.text = 1.to_s
+      end
+    else
+      if sum > 4
+        difference = 4 - @view.humans.text.to_i
+        @view.computers.text = difference.to_s
+      elsif sum == 1
+        @view.computers.text = 1.to_s
+      end
+    end
+  end
+
+  def on_computers_changed
+    on_humans_changed()
+  end
+
   # Radio button (for game mode) changed, update player count
   def on_mode_changed
-    if @view.otto_radiobutton.active? && @view.entry.text.to_i > 2
-      @view.entry.text = 2.to_s
+    if @view.otto_radiobutton.active?
+      if @view.humans.text.to_i >= 2
+        @view.humans.text = 2.to_s
+        @view.computers.text = 0.to_s
+      end
+      if @view.computers.text.to_i > 1
+        @view.computers.text = 1.to_s
+      end
     end
   end
 
@@ -50,8 +79,17 @@ class MainController
       game_type = Otto.new
     end
     players = []
-    @view.entry.text.to_i.times { 
+    @view.humans.text.to_i.times {
       players << HumanPlayer.new
+    }
+    difficulty = 0
+    if @view.easy.active?
+      difficulty = 0.80
+    elsif @view.medium.active?
+      difficulty = 0.40
+    end
+    @view.computers.text.to_i.times {
+      players << AIPlayer.new(difficulty)
     }
     @game = Game.new(game_type, players, @view)
     #Then show the board

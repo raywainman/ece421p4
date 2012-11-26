@@ -4,7 +4,7 @@ require_relative "./contracts/connect4_contracts"
 class Connect4 < GameType
   include Connect4Contracts
 
-  @@labels = ["B", "R", "G", "Y"]
+  @@labels = ["R", "Y", "G", "B"]
 
   def self.labels
     return @@labels

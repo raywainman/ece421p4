@@ -41,6 +41,19 @@ class Game
     @active_player = (@active_player + 1) % @players.size
     puts @grid.to_s
     @view.update(State.new(@grid, @players, @active_player))
+    
+    while @players[@active_player].is_a?(AIPlayer)
+      # sleep(1) # pretend CPU is thinking
+      other_players = Hash.new
+      (0...@players.size).each { |index|
+        if index != @active_player
+          other_players[@players[index].token] = @players[index].winning_token
+        end
+      }
+      @grid.make_move(@game_type.get_player_label(@active_player), @players[@active_player].do_move(@grid, other_players))
+      @active_player = (@active_player + 1) % @players.size
+      @view.update(State.new(@grid, @players, @active_player))
+    end
   end
 
   def play()
