@@ -12,7 +12,15 @@ require_relative "./main_view"
 # To run, simply run the following command:
 # ruby assignment4.rb
 
-view = MainView.new()
-controller = MainController.new(view)
-view.set_controller(controller)
-view.show
+begin
+  view = MainView.new()
+  controller = MainController.new(view)
+  view.set_controller(controller)
+  view.show
+rescue Exception => e
+  puts e.message
+  if view != nil
+    view.show_error_dialog
+  end
+end
+exit!

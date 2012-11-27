@@ -23,7 +23,7 @@ class MainView
     Gtk.init
     @builder = Gtk::Builder::new
     @builder.add_from_file("GUI.glade")
-    self.get_all_widgets()
+    get_all_widgets()
     @col_selected=0
     initialize_postconditions()
   end
@@ -50,44 +50,8 @@ class MainView
     show_board_postconditions
   end
 
-  # Gets all widgets into useful class variables
-  def get_all_widgets
-    #Get all miscellaneous widgets
-    @board=@builder.get_object("board")
-    @win_dialog=@builder.get_object("win_dialog")
-    @win_dialog_label=@builder.get_object("winner_label")
-    @eventbox=@builder.get_object("eventbox1")
-    @connect4_radiobutton=@builder.get_object("radiobutton1")
-    @otto_radiobutton=@builder.get_object("radiobutton2")
-    @humans=@builder.get_object("spinbutton1")
-    @computers=@builder.get_object("spinbutton2")
-    @easy=@builder.get_object("radiobutton3")
-    @medium=@builder.get_object("radiobutton4")
-    @help=@builder.get_object("aboutdialog1")
-    #Get all arrows
-    @arrows = []
-    (1..7).each { |col|
-      @arrows << @builder.get_object("arrow" + col.to_s)
-    }
-    #Get all player labels and images
-    @player_labels = []
-    @player_images = []
-    (1..4).each { |player|
-      @player_labels << @builder.get_object("p"+player.to_s+"_label")
-      @player_images << @builder.get_object("p"+player.to_s+"_image")
-    }
-    #Get all images
-    @imageArray  = Array.new(6) { Array.new(7) }
-    count = 0
-    @imageArray.each_index  { |row|
-      @imageArray[0].each_index { |col|
-        imageString = "img" + count.to_s()
-        @imageArray[row][col] = @builder.get_object(imageString)
-        count = count + 1
-      }
-    }
-    #Set event handler for eventbox
-    @eventbox.set_events(Gdk::Event::POINTER_MOTION_MASK)
+  def show_error_dialog()
+    @error_dialog.show()
   end
 
   #+++++++++++++++++++++Helper functions, not signal handlers!++++++++++++++++++++
@@ -133,6 +97,7 @@ class MainView
     show_win_postconditions()
   end
 
+  # Shows a dialog indicating that it is a tie
   def show_tie()
     @win_dialog_label.text = "Draw!"
     @win_dialog.show
@@ -169,6 +134,7 @@ class MainView
     initialize_players_postconditions()
   end
 
+  # Updates the player labels to reflect that the given active_player is highlighted
   def update_player_labels(active_player)
     update_player_labels_preconditions(active_player)
     hide_all_player_labels_and_images()
@@ -180,5 +146,48 @@ class MainView
     }
     @player_labels[active_player].markup = "<b>" + @players[@players.keys[active_player]] + "</b>"
     update_player_labels_postconditions
+  end
+
+  private
+
+  # Gets all widgets into useful class variables
+  def get_all_widgets
+    #Get all miscellaneous widgets
+    @error_dialog=@builder.get_object("errordialog")
+    @board=@builder.get_object("board")
+    @win_dialog=@builder.get_object("win_dialog")
+    @win_dialog_label=@builder.get_object("winner_label")
+    @eventbox=@builder.get_object("eventbox1")
+    @connect4_radiobutton=@builder.get_object("radiobutton1")
+    @otto_radiobutton=@builder.get_object("radiobutton2")
+    @humans=@builder.get_object("spinbutton1")
+    @computers=@builder.get_object("spinbutton2")
+    @easy=@builder.get_object("radiobutton3")
+    @medium=@builder.get_object("radiobutton4")
+    @help=@builder.get_object("aboutdialog1")
+    #Get all arrows
+    @arrows = []
+    (1..7).each { |col|
+      @arrows << @builder.get_object("arrow" + col.to_s)
+    }
+    #Get all player labels and images
+    @player_labels = []
+    @player_images = []
+    (1..4).each { |player|
+      @player_labels << @builder.get_object("p"+player.to_s+"_label")
+      @player_images << @builder.get_object("p"+player.to_s+"_image")
+    }
+    #Get all images
+    @imageArray  = Array.new(6) { Array.new(7) }
+    count = 0
+    @imageArray.each_index  { |row|
+      @imageArray[0].each_index { |col|
+        imageString = "img" + count.to_s()
+        @imageArray[row][col] = @builder.get_object(imageString)
+        count = count + 1
+      }
+    }
+    #Set event handler for eventbox
+    @eventbox.set_events(Gdk::Event::POINTER_MOTION_MASK)
   end
 end
