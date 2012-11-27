@@ -21,6 +21,7 @@ class Game
     @grid = Grid.new
     @active_player = 0
     @view = view
+    @view.initialize_players(@players)
     class_invariant()
     initialize_postconditions()
   end
@@ -38,12 +39,12 @@ class Game
   # Makes a move for the current player
   def make_move(column)
     @grid.make_move(@game_type.get_player_label(@active_player), column)
-    @active_player = (@active_player + 1) % @players.size
     puts @grid.to_s
     @view.update(State.new(@grid, @players, @active_player))
     if @game_type.evaluate_win(@grid, @game_type.winning_token(@active_player))
-      @view.show_win(@active_player.to_s)
+      @view.show_win((@active_player + 1).to_s)
     end
+    @active_player = (@active_player + 1) % @players.size
 
     other_players = Hash.new
     (0...@players.size).each { |index|
@@ -53,11 +54,11 @@ class Game
     }
     while @players[@active_player].is_a?(AIPlayer)
       @grid.make_move(@game_type.get_player_label(@active_player), @players[@active_player].do_move(@grid, other_players))
-      @active_player = (@active_player + 1) % @players.size
       @view.update(State.new(@grid, @players, @active_player))
       if @game_type.evaluate_win(@grid, @game_type.winning_token(@active_player))
-        @view.show_win(@active_player.to_s)
+        @view.show_win((@active_player + 1).to_s)
       end
+      @active_player = (@active_player + 1) % @players.size
     end
   end
 

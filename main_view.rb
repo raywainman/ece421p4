@@ -135,24 +135,23 @@ class MainView
       }
     }
   end
-  
+
   #Shows the dialog with the winning player (passed as parameter)
   def show_win(winner)
-    show_string=winner+" wins!"
+    show_string = "Player " + winner.to_s + " wins!"
     @win_dialog_label.text=show_string
     @win_dialog.show
   end
-  
+
   #Hide all labels and images depicting the players.
   def hide_all_player_labels_and_images
     @player_images.each { |image|
       image.hide()
     }
     @player_labels.each { |label|
-          label.hide()
-        }
+      label.hide()
+    }
   end
-  
 
   #FOR UPDATING THE VIEW
   def update(state)
@@ -163,7 +162,20 @@ class MainView
       end
     }
     #updates active player
-    
+    @player_labels.each_with_index { |label, index|
+      label.text = "Player " + (index+1).to_s
+    }
+    @player_labels[state.active_player].markup = "<b>" + @player_labels[state.active_player].text + "</b>"
+  end
+
+  def initialize_players(players)
+    hide_all_player_labels_and_images()
+    players.each_with_index { |player, index|
+      @player_images[index].set("resources/" + player.token + ".png")
+      @player_images[index].show()
+      @player_labels[index].show()
+    }
+    @player_labels[0].markup = "<b>" + @player_labels[0].text + "</b>"
   end
 end
 

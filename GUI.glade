@@ -90,6 +90,18 @@
                       <placeholder/>
                     </child>
                     <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
                       <object class="GtkImage" id="img35">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -852,18 +864,6 @@
                         <property name="bottom_attach">2</property>
                       </packing>
                     </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -1288,6 +1288,7 @@
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">board</property>
+    <property name="message_type">other</property>
     <signal name="delete-event" handler="on_win_dialog_delete_event" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox">
@@ -1304,7 +1305,7 @@
             </child>
             <child>
               <object class="GtkButton" id="return_to_main_button">
-                <property name="label" translatable="yes">Return to Main Menu</property>
+                <property name="label" translatable="yes">Return To Main Menu</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
