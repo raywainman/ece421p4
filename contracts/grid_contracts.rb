@@ -1,5 +1,12 @@
 require "test/unit"
 
+# Contracts for the Grid class.
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
+
 module GridContracts
   include Test::Unit::Assertions
   def grid_access_preconditions(i,j)
@@ -8,21 +15,21 @@ module GridContracts
     assert j >= 0, "column must be >= 0"
     assert j < 7, "column must be < 7"
   end
-  
+
   def pre_get_row_length()
     # No preconditions
   end
-  
+
   def post_get_row_length(result)
     assert(result!=nil)
     assert(result.respond_to?("to_i"))
     assert(result >= 0)
   end
-  
+
   def pre_get_column_length()
     # No preconditions
   end
-  
+
   def post_get_column_length(result)
     assert(result!=nil)
     assert(result.respond_to?("to_i"))
@@ -107,6 +114,14 @@ module GridContracts
   end
 
   def is_column_full_postconditions()
+    # No postconditions
+  end
+
+  def is_full_preconditions()
+    # No preconditions
+  end
+
+  def is_full_postconditions()
     # No postconditions
   end
 

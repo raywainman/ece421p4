@@ -1,28 +1,35 @@
 require_relative "./player"
 require_relative "./contracts/ai_player_contracts"
 
+# AI Player object. Can play both Connect4 and OTTO variants.
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
+
 class AIPlayer < Player
   include AIPlayerContracts
   # Creates the AI Player with the given difficulty is the probability that
   # the AI makes a random move as opposed to a smart one
-
-  
-  
   def initialize(difficulty)
     initialize_preconditions(difficulty)
-    @difficulty = difficulty = 0
-    
+    @difficulty = difficulty
     @SEQ_WEIGHT = 2
     @MY_MOVE_SENTINEL = "!"
     @NULL_SENTINEL = "^"
-    
     initialize_postconditions()
   end
+  
+  def set_other_players(other_players)
+    set_other_players_preconditions(other_players)
+    @other_players = other_players
+    set_other_players_postconditions()
+  end
 
-  # TODO: Write the AI algorithm with the @difficulty parameter used as a
-  # probability that the bot makes a random (stupid) move
-  def do_move(grid, other_players)
-    do_move_preconditions(grid, other_players)
+  # Computes a move for the AI player and returns the column number to play
+  def do_move(grid)
+    do_move_preconditions(grid)
     class_invariant()
     # random column for now
     random_chance = rand()
@@ -31,38 +38,41 @@ class AIPlayer < Player
     if(random_chance < @difficulty)
       best_move = do_rand_move(grid)
     else
-      best_move = strategic_move(other_players, grid)
+      best_move = strategic_move(grid)
     end
-    
+
     class_invariant()
     do_move_postconditions(best_move)
     return best_move
   end
 
+  # Gets the player's string description
+  def description()
+    "Computer"
+  end
+
+  private
+  
+  # AI algorithm below courtesy of the following paper:
+  # http://www-personal.engin.umd.umich.edu/~shaout/connect4.pdf
+
   def do_rand_move(grid)
     pre_do_rand_move(grid)
     random = rand(7)
     while grid.is_column_full?(random)
-      random = rand(6)
+      random = rand(7)
     end
     post_do_rand_move(random, grid)
     random
   end
 
-  def description()
-    pre_description()
-    result = "AI"
-    post_description()
-    result
-  end
-
-  def strategic_move(opponent_data, grid)
-    pre_strategic_move(opponent_data, grid)
-    opponent_tokens = opponent_data.keys
+  def strategic_move(grid)
+    pre_strategic_move(grid)
+    opponent_tokens = @other_players.keys
     opponent_winning_seq = []
 
     opponent_tokens.each_with_index { |token, index|
-      opponent_winning_seq << opponent_data[token]
+      opponent_winning_seq << @other_players[token]
     }
 
     currentplayer = opponent_tokens.length()
@@ -79,7 +89,7 @@ class AIPlayer < Player
     vertscore(currentplayer,@token, @winning_token, grid, row_indicator, score)
     leftdiagscore(currentplayer,@token, @winning_token, grid, row_indicator, score)
     rightdiagscore(currentplayer,@token, @winning_token, grid, row_indicator, score)
-    
+
     #Play to win
     col_length.times { |col|
       if(score[currentplayer][col] >= @SEQ_WEIGHT * @winning_token.length)
@@ -99,7 +109,6 @@ class AIPlayer < Player
         win_seq = opponent_winning_seq[index]
         token = opponent_tokens[index]
 
-        
         horizscore(index,token, win_seq, grid, row_indicator, score)
         vertscore(index,token, win_seq, grid, row_indicator, score)
         leftdiagscore(index,token, win_seq, grid, row_indicator, score)
@@ -170,7 +179,7 @@ class AIPlayer < Player
 
   def horizscore(player_index, player_token, win_seq, grid, rowindicator, score)
     pre_horizscore(player_index, player_token, win_seq, grid, rowindicator, score)
-    
+
     row_length = grid.get_row_length()
     col_length = grid.get_column_length()
     expected_len = win_seq.length()
@@ -189,7 +198,7 @@ class AIPlayer < Player
         break unless prepend_unless_nil(string, grid, checkrow, checkcol)
         j+=1
       end
-      
+
       count, checkcol, checkrow = 0, i, rowindicator[i]
       string << @MY_MOVE_SENTINEL.clone()
 
@@ -201,9 +210,8 @@ class AIPlayer < Player
         j+=1
       end
 
-
       process_score(win_seq, string, player_token, player_index, score, i)
-      
+
       post_horizscore(player_index, player_token, win_seq, grid, rowindicator, score)
     }
 
@@ -238,17 +246,17 @@ class AIPlayer < Player
     end
 
     post_prepend_unless_nil(result, result_string, grid, checkrow, checkcol)
-      result
+    result
   end
 
   def vertscore(player_index,player_token, win_seq, grid, rowindicator, score)
     pre_vertscore(player_index,player_token, win_seq, grid, rowindicator, score)
-    
+
     row_length = grid.get_row_length()
     col_length = grid.get_column_length()
     expected_len = win_seq.length()
     string = ""
-    
+
     col_length.times{ |i|
 
       count, checkrow = 0, rowindicator[i]
@@ -337,7 +345,6 @@ class AIPlayer < Player
         j+=1
       end
 
-  
       process_score(win_seq, string, player_token, player_index, score, i)
       post_rightdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
     }
@@ -364,7 +371,6 @@ class AIPlayer < Player
     temp = expected_sequence[0..length]
     value_hash[temp] = temp.length() * @SEQ_WEIGHT
 
-    
     post_build_value_hash(value_hash)
     value_hash
   end
@@ -372,7 +378,7 @@ class AIPlayer < Player
   def process_score(expected_seq, seq, token, player_index, score, column)
     pre_process_score(expected_seq, seq, token, player_index, score, column)
     value_hash = build_value_hash(expected_seq)
-    
+
     seq_copy = seq.clone
     seq_len = seq.length
     expected_seq_len = expected_seq.length
@@ -390,7 +396,6 @@ class AIPlayer < Player
 
       string = ""
       n = i
-
 
       while(n < i + expected_seq_len and n < seq_len)
 
@@ -418,7 +423,7 @@ class AIPlayer < Player
     }
 
     sub_sequences.uniq!
-    
+
     sub_sequences.each {|sub_seq|
       value = value_hash[sub_seq]
 
@@ -454,7 +459,6 @@ class AIPlayer < Player
     }
     post_buildRowIndicator(grid, row_indicator)
     return row_indicator
-
   end
 
 end

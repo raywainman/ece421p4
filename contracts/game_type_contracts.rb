@@ -1,5 +1,12 @@
 require "test/unit"
 
+# Contracts for the GameType class.
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
+
 module GameTypeContracts
   include Test::Unit::Assertions
   
@@ -87,5 +94,4 @@ module GameTypeContracts
   def post_evaluate_left_diagonal_win(result)
     check_matches_result(result)
   end
-
 end

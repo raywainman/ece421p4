@@ -1,6 +1,12 @@
 require_relative "./contracts/player_contracts"
 
-# Abstract Player class
+# Abstract Player class.
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
+
 class Player
   include PlayerContracts
 
@@ -8,7 +14,7 @@ class Player
   
   # Computes a move to be played by the player, returns the column number to
   # play
-  def do_move(grid, other_players)
+  def do_move(grid)
     raise "Not Implemented"
   end
 

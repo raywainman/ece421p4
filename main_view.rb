@@ -14,11 +14,9 @@ require_relative "./contracts/main_view_contracts"
 class MainView
   include MainViewContracts
 
-  attr_reader :spinner, :humans, :computers, :aboutdialog, :board, :boardstatusbar, :eventbox,
-  :connect4_radiobutton, :otto_radiobutton, :arrows, :imageArray, :col_selected, :easy, :medium,
-  :win_dialog, :player_labels, :player_images
-
-  @col_selected=0
+  # Expose form widgets and other important components
+  attr_reader :humans, :computers, :connect4_radiobutton, :otto_radiobutton, :easy, :medium,
+  :col_selected, :win_dialog, :board, :help
   # Initializes GUI via .glade file and gets all the widgets
   def initialize()
     initialize_preconditions()
@@ -26,32 +24,36 @@ class MainView
     @builder = Gtk::Builder::new
     @builder.add_from_file("GUI.glade")
     self.get_all_widgets()
+    @col_selected=0
+    initialize_postconditions()
   end
 
+  # Sets the controller for this view and attaches all signal handlers
   def set_controller(controller)
     @controller = controller
     @builder.connect_signals{ |handler| controller.method(handler) }
   end
 
+  # Shows the main application window (the main menu)
   def show
     @builder.get_object("mainMenu").show()
     Gtk.main()
   end
 
+  # Shows the board and assigns it the passed in string value as a title
   def show_board(string)
-    @board.title=string
+    show_board_preconditions(string)
+    @board.title = string
     @board.show()
+    show_board_postconditions
   end
 
   # Gets all widgets into useful class variables
   def get_all_widgets
     #Get all miscellaneous widgets
-    @spinner=@builder.get_object("spinner1")
-    @aboutdialog=@builder.get_object("aboutdialog1")
     @board=@builder.get_object("board")
     @win_dialog=@builder.get_object("win_dialog")
     @win_dialog_label=@builder.get_object("winner_label")
-    @boardstatusbar=@builder.get_object("statusbar2")
     @eventbox=@builder.get_object("eventbox1")
     @connect4_radiobutton=@builder.get_object("radiobutton1")
     @otto_radiobutton=@builder.get_object("radiobutton2")
@@ -59,6 +61,7 @@ class MainView
     @computers=@builder.get_object("spinbutton2")
     @easy=@builder.get_object("radiobutton3")
     @medium=@builder.get_object("radiobutton4")
+    @help=@builder.get_object("aboutdialog1")
     #Get all arrows
     @arrows = []
     (1..7).each { |col|
@@ -86,8 +89,8 @@ class MainView
   end
 
   #+++++++++++++++++++++Helper functions, not signal handlers!++++++++++++++++++++
-  #Function that shows the corresponding arrow based on the value
-  #stored in the global variable "col_selected"
+  # Shows the corresponding arrow based on the value stored in the class variable
+  # @col_selected
   def show_arrow()
     #hide all arrows first
     @arrows.each { |arrow|
@@ -105,29 +108,12 @@ class MainView
     column_width=board_width/9
     #get the number of arrow that should be visible
     col = (x/column_width).floor-1
-    if col >= 0 && col < 7
+    if col >= 0 && col < 7 && !@controller.is_column_full?(col)
       @col_selected = col
     end
   end
 
-  # Method for showing and activating the spinner.
-  # Also pushes the message to the status bar
-  # CALL THIS WHEN THE IT'S THE OPPONENT TURN!
-  def activate_spinner()
-    @spinner.show
-    @spinner.active=true
-    @boardstatusbar.push(0,"Waiting for opponent's move...")
-  end
-
-  # Method for stopping and hiding the spinner
-  # CALL THIS WHEN IT IS THE PLAYER'S TURN!
-  def deactivate_spinner()
-    @spinner.active=false
-    @spinner.hide
-    @boardstatusbar.push(0,"Your turn.")
-  end
-
-  # Reset the board images to the empty pieces
+  # Resets the board images to the empty pieces
   def reset_board_images()
     @imageArray.each_index { |row|
       @imageArray[0].each_index { |col|
@@ -136,14 +122,21 @@ class MainView
     }
   end
 
-  #Shows the dialog with the winning player (passed as parameter)
+  # Shows a dialog with the winning player
   def show_win(winner)
-    show_string = "Player " + winner.to_s + " wins!"
-    @win_dialog_label.text=show_string
+    show_win_preconditions(winner)
+    show_string = winner.to_s + " wins!"
+    @win_dialog_label.text = show_string
+    @win_dialog.show
+    show_win_postconditions()
+  end
+
+  def show_tie()
+    @win_dialog_label.text = "Draw!"
     @win_dialog.show
   end
 
-  #Hide all labels and images depicting the players.
+  # Hides all labels and images depicting the players.
   def hide_all_player_labels_and_images
     @player_images.each { |image|
       image.hide()
@@ -153,29 +146,38 @@ class MainView
     }
   end
 
-  #FOR UPDATING THE VIEW
+  # Updates the game board from the given state object
   def update(state)
-    #updates board
+    update_preconditions(state)
     state.grid.each_with_index { |e, row, col|
       if e != nil
         @imageArray[row][col].set("resources/piece_" + e.to_s + ".png")
       end
     }
     #updates active player
-    @player_labels.each_with_index { |label, index|
-      label.text = "Player " + (index+1).to_s
-    }
-    @player_labels[state.active_player].markup = "<b>" + @player_labels[state.active_player].text + "</b>"
+    update_player_labels(state.active_player)
+    update_postconditions()
   end
 
+  # Initializes the board with the given players (hash of name->token value)
   def initialize_players(players)
+    initialize_players_preconditions(players)
+    @players = players
+    update_player_labels(0)
+    initialize_players_postconditions()
+  end
+
+  def update_player_labels(active_player)
+    update_player_labels_preconditions(active_player)
     hide_all_player_labels_and_images()
-    players.each_with_index { |player, index|
-      @player_images[index].set("resources/" + player.token + ".png")
+    @players.keys.each_with_index { |player, index|
+      @player_images[index].set("resources/" + player + ".png")
       @player_images[index].show()
+      @player_labels[index].markup = @players[player]
       @player_labels[index].show()
     }
-    @player_labels[0].markup = "<b>" + @player_labels[0].text + "</b>"
+    @player_labels[active_player].markup = "<b>" + @players[@players.keys[active_player]] + "</b>"
+    update_player_labels_postconditions
   end
 end
 

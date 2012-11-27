@@ -1,8 +1,16 @@
 require_relative "./contracts/game_type_contracts"
 
-# Abstract game type class
+# Abstract game type class. Variants must implement the methods defined in
+# in this class.
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
+
 class GameType
   include GameTypeContracts
+  
   # Gets the label that should be given to the given player number
   def get_player_label(player)
     raise "Not implemented"

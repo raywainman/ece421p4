@@ -1,5 +1,12 @@
 require "test/unit"
 
+# Contracts for the Player class.
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
+
 module PlayerContracts
   include Test::Unit::Assertions
   def set_token_preconditions(token)

@@ -1,38 +1,40 @@
-require_relative "./connect4"
-require_relative "./otto"
-require_relative "./human_player"
 require_relative "./ai_player"
+require_relative "./connect4"
 require_relative "./game"
+require_relative "./human_player"
+require_relative "./otto"
+require_relative "./contracts/main_controller_contracts"
+
+# Controller object for the MainView object.
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
 
 class MainController
+  include MainControllerContracts
+  
   def initialize(view)
     @view = view
   end
+  
+  # VIEW METHODS
+  
+  # Delegate call to the model to check if the given column is full
+  def is_column_full?(column)
+    @game.is_column_full?(column)
+  end
 
-  # Quits the application
+  # MAIN MENU SIGNALS
+
+  # Application closed
   def gtk_main_quit
     Gtk.main_quit
     exit!
   end
 
-  # Plus button clicked
-  def on_plus_clicked
-    text = @view.entry.text.to_i
-    if text < 2
-      @view.entry.text = (text + 1).to_s()
-    elsif text < 4 && @view.connect4_radiobutton.active?
-      @view.entry.text = (text + 1).to_s()
-    end
-  end
-
-  # Minus button clicked
-  def on_minus_clicked
-    text = @view.entry.text.to_i
-    if text > 1
-      @view.entry.text = (text - 1).to_s()
-    end
-  end
-
+  # Number of human players changed
   def on_humans_changed
     sum = @view.humans.text.to_i + @view.computers.text.to_i
     if @view.otto_radiobutton.active?
@@ -52,11 +54,12 @@ class MainController
     end
   end
 
+  # Number of computer players changed
   def on_computers_changed
     on_humans_changed()
   end
 
-  # Radio button (for game mode) changed, update player count
+  # Radio button (for game mode) changed
   def on_mode_changed
     if @view.otto_radiobutton.active?
       if @view.humans.text.to_i >= 2
@@ -69,14 +72,13 @@ class MainController
     end
   end
 
-  #Starts the game by saving the game mode in @game_mode
-  #as a string, and shows the window where the board is.
+  # Start button clicked
   def on_start_clicked
     #Set game type based on radio buttons
     if @view.connect4_radiobutton.active?
-      game_type = Connect4.new
+      game_type = Connect4.instance
     else
-      game_type = Otto.new
+      game_type = Otto.instance
     end
     players = []
     @view.humans.text.to_i.times {
@@ -93,18 +95,32 @@ class MainController
     }
     @game = Game.new(game_type, players, @view)
     @view.reset_board_images()
-    #@view.hide_all_player_labels_and_images
     #Then show the board
     @view.show_board(game_type.game_name + " Playing Area")
   end
-
-  #When the mouse is clicked inside the board. Here is where
-  #the state object is sent to the model
-  def on_eventbox1_button_release_event
-    @game.make_move(@view.col_selected)
+  
+  def on_help_clicked
+    @view.help.show()
+  end
+  
+  def on_help_close
+    @view.help.hide()
+  end
+  
+  def on_delete_help
+    @view.help.hide_on_delete()
   end
 
-  #When the mouse is moved over the board
+  # BOARD SIGNALS
+
+  # Mouse clicked on one of the columns
+  def on_eventbox1_button_release_event
+    if !@game.is_column_full?(@view.col_selected)
+      @game.make_move(@view.col_selected)
+    end
+  end
+
+  # Mouse hovered over one of the columns
   def on_eventbox1_motion_notify_event(widget,event)
     #get the column
     @view.set_column_selected(event.x)
@@ -112,23 +128,28 @@ class MainController
     @view.show_arrow()
   end
 
-  #When the user clicks on the button contained
-  #in the winner dialog. Simply hides the two windows  
-  def on_return_to_main_button_clicked
-    @view.win_dialog.hide()
-    @view.board.hide()    
-  end
-  
-  #Signal handler that prevents the board from being deleted
-  #and hides it instead
+  # Board hidden
   def on_board_delete_event
     @view.board.hide_on_delete()
   end
-  
-  #Same as above: will only hide the dialog, not delete it
+
+  # WIN DIALOG SIGNALS
+
+  # Return to main menu button clicked
+  def on_return_to_main_button_clicked
+    @view.win_dialog.hide()
+    @view.board.hide()
+  end
+
+  # Play again button clicked
+  def on_playagain_clicked
+    @game.reset
+    @view.win_dialog.hide()
+  end
+
+  # Dialog hidden
   def on_win_dialog_delete_event
     @view.board.hide()
     @view.win_dialog.hide_on_delete()
   end
-  
 end

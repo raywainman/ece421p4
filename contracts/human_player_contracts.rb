@@ -1,11 +1,16 @@
 require "test/unit"
 
+# Contracts for the HumanPlayer class.
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
+
 module HumanPlayerContracts
   include Test::Unit::Assertions
-  def do_move_preconditions(grid, other_players)
+  def do_move_preconditions(grid)
     assert grid.is_a?(Grid), "invalid grid argument"
-    assert other_players.is_a?(Hash), "other players must be hash"
-    assert other_players.size <= 4, "other_players must be less than size 4"
   end
 
   def do_move_postconditions(result)

@@ -1,27 +1,50 @@
-require_relative "./connect4"
-require_relative "./human_player"
-require_relative "./grid"
 require_relative "./ai_player"
-require_relative "./contracts/game_contracts"
+require_relative "./connect4"
+require_relative "./grid"
+require_relative "./human_player"
 require_relative "./state"
+require_relative "./contracts/game_contracts"
+
+# Main game object. All game logic is amalgamated here.
+
+# Author:: Dustin Durand (dddurand@ualberta.ca)
+# Author:: Kenneth Rodas (krodas@ualberta.ca)
+# Author:: Raymond Wainman (wainman@uablerta.ca)
+# (ECE 421 - Assignment #4)
 
 class Game
   include GameContracts
-  # Creates a new instance of the game given a GameType and a list of Player objects
-  # TODO: UPDATE CONTRACTS FOR VIEW
+  # Creates a new instance of the game given a GameType, a list of Player objects
+  # and a View object to update
   def initialize(game_type, players, view)
-    initialize_preconditions(game_type, players)
+    initialize_preconditions(game_type, players, view)
     @game_type = game_type
     @players = players
-    # Set the tokens
+    # Set the tokens and other player properties
     @players.each_with_index{ |player, index|
       player.set_token(@game_type.get_player_label(index))
       player.set_winning_token(@game_type.winning_token(index))
     }
+    @players.each { |player|
+      if player.is_a?(AIPlayer)
+        other_players = Hash.new
+        @players.each { |other_player|
+          if other_player != player
+            other_players[other_player.token] = other_player.winning_token
+          end
+        }
+        player.set_other_players(other_players)
+      end
+    }
     @grid = Grid.new
     @active_player = 0
     @view = view
-    @view.initialize_players(@players)
+    player_names = {}
+    (0...@players.size).each { |player_index|
+      player_name =  @players[player_index].description + " " + (player_index+1).to_s
+      player_names[@players[player_index].token] = player_name
+    }
+    @view.initialize_players(player_names)
     class_invariant()
     initialize_postconditions()
   end
@@ -32,57 +55,91 @@ class Game
     class_invariant()
     @grid.reset()
     @active_player = 0
+    @view.reset_board_images
+    @view.update(get_state())
+    puts "Resetting game"
     class_invariant()
     reset_postconditions()
   end
 
-  # Makes a move for the current player
+  # Delegate method to check if the given column is full
+  def is_column_full?(column)
+    @grid.is_column_full?(column)
+  end
+
+  # Constructs a State object from the current game state
+  def get_state()
+    get_state_preconditions()
+    class_invariant()
+    result = State.new(@grid, (@active_player + 1) % @players.size)
+    class_invariant()
+    get_state_postconditions(result)
+    return result
+  end
+
+  # Determines if the current board state results in a win for the current
+  # active player
+  def is_win?()
+    is_win_preconditions()
+    class_invariant()
+    result = @game_type.evaluate_win(@grid, @game_type.winning_token(@active_player))
+    if result
+      puts "Player " + (@active_player+1).to_s + " has won"
+    end
+    class_invariant()
+    is_win_postconditions(result)
+    return result
+  end
+
+  # Calls the view to alert the user that a win has occurred for the current player
+  def show_win
+    show_win_preconditions()
+    class_invariant()
+    string = @players[@active_player].description + " " + (@active_player + 1).to_s
+    @view.show_win(string)
+    class_invariant()
+    show_win_postconditions()
+  end
+
+  # Checks to see if it is the end of the game (via a win or tie) and launches
+  # the appropriate action.
+  def is_end?
+    if is_win?()
+      show_win()
+      return true
+    elsif @grid.is_full?
+      puts "Tie Game"
+      @view.show_tie()
+      return true
+    end
+    return false
+  end
+
+  # Plays a move for the current active player and will play any subsequent AI players
+  # (if it is their turn)
   def make_move(column)
+    make_move_preconditions(column)
+    class_invariant()
+    puts "Player " + (@active_player+1).to_s + " made a move on column " + column.to_s
     @grid.make_move(@game_type.get_player_label(@active_player), column)
-    puts @grid.to_s
-    @view.update(State.new(@grid, @players, @active_player))
-    if @game_type.evaluate_win(@grid, @game_type.winning_token(@active_player))
-      @view.show_win((@active_player + 1).to_s)
+    @view.update(get_state())
+    if is_end?
+      return
     end
     @active_player = (@active_player + 1) % @players.size
 
-    other_players = Hash.new
-    (0...@players.size).each { |index|
-      if index != @active_player
-        other_players[@players[index].token] = @players[index].winning_token
-      end
-    }
+    # Play AI moves (if there are any)
     while @players[@active_player].is_a?(AIPlayer)
-      @grid.make_move(@game_type.get_player_label(@active_player), @players[@active_player].do_move(@grid, other_players))
-      @view.update(State.new(@grid, @players, @active_player))
-      if @game_type.evaluate_win(@grid, @game_type.winning_token(@active_player))
-        @view.show_win((@active_player + 1).to_s)
+      move = @players[@active_player].do_move(@grid)
+      puts "AI " + (@active_player+1).to_s + " made a move on column " + move.to_s
+      @grid.make_move(@game_type.get_player_label(@active_player), @players[@active_player].do_move(@grid))
+      @view.update(get_state())
+      if is_end?
+        return
       end
       @active_player = (@active_player + 1) % @players.size
     end
-  end
-
-  def play()
-    while true
-      puts @grid.to_s
-      puts "Player " + @active_player.to_s + "'s turn (" + @game_type.get_player_label(@active_player) + ") - " + @players[@active_player].description
-      other_players = Hash.new
-      (0...@players.size).each { |index|
-        if index != @active_player
-          other_players[@players[index].token] = @players[index].winning_token
-        end
-      }
-      @grid.make_move(@game_type.get_player_label(@active_player), @players[@active_player].do_move(@grid, other_players))
-      if @game_type.evaluate_win(@grid, @game_type.winning_token(@active_player))
-        puts "Player " + @active_player.to_s + " has won!"
-        reset()
-      else
-        @active_player = (@active_player + 1) % @players.size
-      end
-    end
+    class_invariant()
+    make_move_postconditions()
   end
 end
-
-#players = [HumanPlayer.new, AIPlayer.new(0.5), AIPlayer.new(0.5)]
-#game = Game.new(Connect4.new, players)
-#game.play
