@@ -180,8 +180,3 @@ class MainView
     update_player_labels_postconditions
   end
 end
-
-hello = MainView.new()
-controller = MainController.new(hello)
-hello.set_controller(controller)
-hello.show
