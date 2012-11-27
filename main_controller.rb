@@ -19,13 +19,6 @@ class MainController
     @view = view
   end
   
-  # VIEW METHODS
-  
-  # Delegate call to the model to check if the given column is full
-  def is_column_full?(column)
-    @game.is_column_full?(column)
-  end
-
   # MAIN MENU SIGNALS
 
   # Application closed

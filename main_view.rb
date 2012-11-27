@@ -30,8 +30,10 @@ class MainView
 
   # Sets the controller for this view and attaches all signal handlers
   def set_controller(controller)
+    set_controller_preconditions(controller)
     @controller = controller
     @builder.connect_signals{ |handler| controller.method(handler) }
+    set_controller_postconditions()
   end
 
   # Shows the main application window (the main menu)
@@ -108,7 +110,7 @@ class MainView
     column_width=board_width/9
     #get the number of arrow that should be visible
     col = (x/column_width).floor-1
-    if col >= 0 && col < 7 && !@controller.is_column_full?(col)
+    if col >= 0 && col < 7 && @imageArray[0][col].file == "resources/piece_empty.png"
       @col_selected = col
     end
   end

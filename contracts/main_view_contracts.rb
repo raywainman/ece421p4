@@ -34,7 +34,6 @@ module MainViewContracts
   end
 
   def set_controller_preconditions(controller)
-    assert controller.respond_to?("is_column_full"), "controller must respond to is_column_full"
     assert controller.respond_to?("on_win_dialog_delete_event"), "controller must respond to on_win_dialog_delete_event"
     assert controller.respond_to?("on_return_to_main_button_clicked"), "controller must respond to on_return_to_main_button_clicked"
     assert controller.respond_to?("on_playagain_clicked"), "controller must respond to on_playagain_clicked"
