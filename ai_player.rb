@@ -311,6 +311,7 @@ class AIPlayer < Player
 
       process_score(win_seq, string, player_token, player_index, score, i)
       post_leftdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
+      puts score.to_s
     }
   end
 
@@ -458,6 +459,7 @@ class AIPlayer < Player
       }
     }
     post_buildRowIndicator(grid, row_indicator)
+    puts row_indicator.to_s
     return row_indicator
   end
 
