@@ -79,23 +79,27 @@ class Game
 
   # Determines if the current board state results in a win for the current
   # active player
-  def is_win?()
+  def is_win()
     is_win_preconditions()
     class_invariant()
-    result = @game_type.evaluate_win(@grid, @game_type.winning_token(@active_player))
-    if result
-      puts "Player " + (@active_player+1).to_s + " has won"
-    end
+    winner = -1
+    (0...@players.size).each { |player_index|
+      result = @game_type.evaluate_win(@grid, @game_type.winning_token(player_index))
+      if result
+        winner = player_index
+        puts "Player " + (player_index+1).to_s + " has won"
+      end
+    }
     class_invariant()
-    is_win_postconditions(result)
-    return result
+    is_win_postconditions(winner)
+    return winner
   end
 
   # Calls the view to alert the user that a win has occurred for the current player
-  def show_win
-    show_win_preconditions()
+  def show_win(winner)
+    show_win_preconditions(winner)
     class_invariant()
-    string = @players[@active_player].description + " " + (@active_player + 1).to_s
+    string = @players[winner].description + " " + (winner + 1).to_s
     @view.show_win(string)
     class_invariant()
     show_win_postconditions()
@@ -104,8 +108,9 @@ class Game
   # Checks to see if it is the end of the game (via a win or tie) and launches
   # the appropriate action.
   def is_end?
-    if is_win?()
-      show_win()
+    winner = is_win()
+    if winner != -1
+      show_win(winner)
       return true
     elsif @grid.is_full?
       puts "Tie Game"

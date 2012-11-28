@@ -55,11 +55,12 @@ module GameContracts
   end
 
   def is_win_postconditions(result)
-    assert result || !result, "result must be a boolean value"
+    assert result == -1 || (result >= 0 && result < @players.size), "result must be a player value"
   end
 
-  def show_win_preconditions()
-    # No preconditions
+  def show_win_preconditions(winner)
+    assert winner >= 0, "winner must be a valid player"
+    assert winner < @players.size, "winner must be a valid player"
   end
 
   def show_win_postconditions()
