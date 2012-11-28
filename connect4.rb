@@ -1,4 +1,4 @@
-require "Singleton"
+require "singleton"
 
 require_relative "./game_type"
 require_relative "./contracts/connect4_contracts"

@@ -65,6 +65,7 @@ module AIPlayerContracts
     col = grid.get_column_length()
     assert(result!=nil, "result cannot be nil for a random move")
     assert((result >= 0 and result < col), "invalid result detected")
+    assert(!grid.is_column_full?(result), "invalid result detected")
   end
 
   def pre_do_rand_move(grid)
