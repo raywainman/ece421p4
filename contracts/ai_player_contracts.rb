@@ -77,7 +77,7 @@ module AIPlayerContracts
 
   def post_strategic_move(result, grid)
     check_column_result(result, grid)
-    assert(!grid.is_column_full?(result), "invalid result detected: ")
+    assert(!grid.is_column_full?(result), "invalid result detected: " + result.to_s)
   end
 
   def post_do_rand_move(result, grid)

@@ -169,7 +169,10 @@ class AIPlayer < Player
     end
 
     if(!found)
-      best_choice = rand(0...col_length)
+      best_choice = rand(7)
+      while grid.is_column_full?(best_choice)
+        best_choice = rand(7)
+          end
     end
 
     post_strategic_move(best_choice, grid)
@@ -311,7 +314,6 @@ class AIPlayer < Player
 
       process_score(win_seq, string, player_token, player_index, score, i)
       post_leftdiagscore(player_index,player_token, win_seq, grid, rowindicator, score)
-      puts score.to_s
     }
   end
 
@@ -361,11 +363,11 @@ class AIPlayer < Player
       temp = expected_sequence[0...i]
       temp << @NULL_SENTINEL
       temp_rev = temp.reverse
-      value_hash[temp] = [0..i].length() * @SEQ_WEIGHT + 1
-      value_hash[temp_rev] = [0..i].length() * @SEQ_WEIGHT + 1
+      value_hash[temp] = i * @SEQ_WEIGHT + 1
+      value_hash[temp_rev] = i * @SEQ_WEIGHT + 1
 
       temp.insert(0, @NULL_SENTINEL)
-      value_hash[temp] = [0..i].length() * @SEQ_WEIGHT + 2
+      value_hash[temp] = i * @SEQ_WEIGHT + 2
 
     }
 
@@ -459,7 +461,6 @@ class AIPlayer < Player
       }
     }
     post_buildRowIndicator(grid, row_indicator)
-    puts row_indicator.to_s
     return row_indicator
   end
 
